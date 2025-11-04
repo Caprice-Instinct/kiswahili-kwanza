@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 254 254 254; /* #fefefe - Off-white to reduce glare */
+    --foreground: 31 41 55; /* #1f2937 - Dark gray instead of pure black */
+    --card: 255 255 255; /* #ffffff */
+    --card-foreground: 31 41 55; /* #1f2937 */
+    --popover: 255 255 255; /* #ffffff */
+    --popover-foreground: 31 41 55; /* #1f2937 */
+    --primary: 14 165 233; /* #0ea5e9 - Main blue */
+    --primary-foreground: 255 255 255; /* #ffffff */
+    --secondary: 217 70 239; /* #d946ef - Soft purple */
+    --secondary-foreground: 255 255 255; /* #ffffff */
+    --muted: 249 250 251; /* #f9fafb */
+    --muted-foreground: 107 114 128; /* #6b7280 */
+    --accent: 243 244 246; /* #f3f4f6 */
+    --accent-foreground: 31 41 55; /* #1f2937 */
+    --destructive: 239 68 68; /* #ef4444 */
+    --destructive-foreground: 255 255 255; /* #ffffff */
+    --border: 229 231 235; /* #e5e7eb */
+    --input: 255 255 255; /* #ffffff */
+    --ring: 14 165 233; /* #0ea5e9 */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 17 24 39; /* #111827 - Dark gray background */
+    --foreground: 249 250 251; /* #f9fafb - Light text */
+    --card: 31 41 55; /* #1f2937 - Dark card background */
+    --card-foreground: 249 250 251; /* #f9fafb */
+    --popover: 31 41 55; /* #1f2937 */
+    --popover-foreground: 249 250 251; /* #f9fafb */
+    --primary: 59 130 246; /* #3b82f6 - Bright blue for dark mode */
+    --primary-foreground: 255 255 255; /* #ffffff */
+    --secondary: 192 38 211; /* #c026d3 - Purple for dark mode */
+    --secondary-foreground: 17 24 39; /* #111827 */
+    --muted: 55 65 81; /* #374151 */
+    --muted-foreground: 156 163 175; /* #9ca3af */
+    --accent: 55 65 81; /* #374151 */
+    --accent-foreground: 249 250 251; /* #f9fafb */
+    --destructive: 239 68 68; /* #ef4444 - Red for dark mode */
+    --destructive-foreground: 255 255 255; /* #ffffff */
+    --border: 55 65 81; /* #374151 */
+    --input: 31 41 55; /* #1f2937 */
+    --ring: 59 130 246; /* #3b82f6 */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-readable;
+    /* Dyslexia-friendly text rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Increased line spacing for better readability */
+    line-height: 1.6;
+    /* Prevent text selection issues */
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+  }
+  
+  /* Dyslexia-friendly text styles */
+  .dyslexic-text {
+    font-family: 'Comic Neue', 'Comic Sans MS', Arial, sans-serif;
+    letter-spacing: 0.05em;
+    word-spacing: 0.1em;
+    line-height: 1.8;
+  }
+  
+  /* High contrast mode support */
+  @media (prefers-contrast: high) {
+    :root {
+      --background: #ffffff;
+      --foreground: #000000;
+      --border: #000000;
+    }
+  }
+  
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  
+  /* Button and interactive element styles */
+  button, [role="button"] {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  button:hover, [role="button"]:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Improved button hover effects */
+  .btn-hover-primary:hover {
+    background-color: rgb(59 130 246 / 0.1);
+    color: rgb(29 78 216);
+  }
+  
+  .dark .btn-hover-primary:hover {
+    background-color: rgb(59 130 246 / 0.2);
+    color: rgb(147 197 253);
+  }
+  
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.3s ease-in-out;
+    border: 1px solid transparent;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.1), 0 10px 10px -5px rgba(59, 130, 246, 0.04);
+    border-color: rgb(59 130 246 / 0.2);
+  }
+  
+  /* Dark mode card hover effects */
+  .dark .card-hover:hover {
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2), 0 10px 10px -5px rgba(59, 130, 246, 0.1);
+    border-color: rgb(59 130 246 / 0.3);
+  }
+  
+  /* Dark mode specific styles */
+  .dark {
+    color-scheme: dark;
+  }
+  
+  .dark .bg-soft {
+    background-color: #1f2937;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Dyslexia-friendly utilities */
+  .text-dyslexic {
+    @apply dyslexic-text;
+  }
+  
+  .spacing-comfortable {
+    @apply leading-relaxed tracking-wide;
+  }
+  
+  .bg-soft {
+    background-color: #fefefe;
+  }
+  
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
