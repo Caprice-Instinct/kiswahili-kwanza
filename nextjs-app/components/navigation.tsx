@@ -47,16 +47,16 @@ export function Navigation() {
   const { data: session, status } = useSession()
 
   return (
-    <nav className="bg-white dark:bg-gray-900 border-b-2 border-primary-100 dark:border-gray-700 shadow-sm sticky top-0 z-50">
+    <nav className="bg-white dark:bg-gray-900 border-b-2 border-sky-100 dark:border-gray-700 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 bg-gradient-to-br from-sky-500 to-violet-500 rounded-full flex items-center justify-center group-hover:scale-105 transition-transform">
               <Heart className="w-6 h-6 text-white" />
             </div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold text-primary-700 dark:text-primary-400 dyslexic-text">
+              <h1 className="text-xl font-bold text-sky-700 dark:text-sky-400 dyslexic-text">
                 Kiswahili Kwanza
               </h1>
               <p className="text-xs text-gray-500 dark:text-gray-400 dyslexic-text">Jifunze kwa furaha</p>
@@ -76,8 +76,8 @@ export function Navigation() {
                     className={`
                       flex items-center space-x-2 px-4 py-2 rounded-lg transition-all duration-200
                       ${isActive 
-                        ? 'bg-primary-500 text-white shadow-md dark:bg-primary-600' 
-                        : 'text-gray-600 dark:text-gray-300 hover:bg-primary-50 hover:text-primary-700 dark:hover:bg-primary-900/20 dark:hover:text-primary-300'
+                        ? 'bg-sky-500 text-white shadow-md dark:bg-sky-600' 
+                        : 'text-gray-600 dark:text-gray-300 hover:bg-sky-50 hover:text-sky-700 dark:hover:bg-sky-900/20 dark:hover:text-sky-300'
                       }
                       dyslexic-text font-medium
                     `}
@@ -98,17 +98,17 @@ export function Navigation() {
             {session && (
               <>
                 {/* Sound Toggle */}
-                <Button variant="ghost" size="icon" className="text-gray-600 dark:text-gray-400 hover:text-primary-700 dark:hover:text-primary-300 hover:bg-primary-50 dark:hover:bg-primary-900/20">
+                <Button variant="ghost" size="icon" className="text-gray-600 dark:text-gray-400 hover:text-sky-700 dark:hover:text-sky-300 hover:bg-sky-50 dark:hover:bg-sky-900/20">
                   <Volume2 className="w-5 h-5" />
                 </Button>
                 
                 {/* User Profile Dropdown */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center space-x-2 p-2 hover:bg-primary-50 dark:hover:bg-primary-900/20">
-                      <Avatar className="w-8 h-8 border-2 border-primary-200">
+                    <Button variant="ghost" className="flex items-center space-x-2 p-2 hover:bg-sky-50 dark:hover:bg-sky-900/20">
+                      <Avatar className="w-8 h-8 border-2 border-sky-200">
                         <AvatarImage src={session.user?.image || "/placeholder-avatar.jpg"} alt="Mwanafunzi" />
-                        <AvatarFallback className="bg-primary-100 text-primary-700 font-semibold">
+                        <AvatarFallback className="bg-sky-100 text-sky-700 font-semibold">
                           {session.user?.name?.charAt(0) || 'M'}
                         </AvatarFallback>
                       </Avatar>
@@ -193,9 +193,9 @@ export function Navigation() {
                 <Button
                   variant="ghost"
                   className={`
-                    w-full flex flex-col items-center space-y-1 py-2 px-1 hover:bg-primary-50 hover:text-primary-700 dark:hover:bg-primary-900/20 dark:hover:text-primary-300
+                    w-full flex flex-col items-center space-y-1 py-2 px-1 hover:bg-sky-50 hover:text-sky-700 dark:hover:bg-sky-900/20 dark:hover:text-sky-300
                     ${isActive 
-                      ? 'text-primary-600 bg-primary-50 dark:text-primary-400 dark:bg-primary-900/20' 
+                      ? 'text-sky-600 bg-sky-50 dark:text-sky-400 dark:bg-sky-900/20' 
                       : 'text-gray-600 dark:text-gray-400'
                     }
                   `}

@@ -8,7 +8,7 @@ export default withAuth(
     callbacks: {
       authorized: ({ token, req }) => {
         // Protect these routes
-        const protectedPaths = ['/lessons', '/practice', '/progress']
+        const protectedPaths = ['/dashboard']
         const isProtectedPath = protectedPaths.some(path => 
           req.nextUrl.pathname.startsWith(path)
         )
