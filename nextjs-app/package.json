@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "init-db": "tsx scripts/init-db.ts",
+    "init-schema": "tsx scripts/init-schema.ts",
     "seed": "tsx scripts/init-db.ts",
     "setup-auth": "node scripts/setup-auth.js",
     "test-auth": "node scripts/test-auth.js"
