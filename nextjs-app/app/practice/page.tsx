@@ -33,68 +33,7 @@ type Exercise = {
   category: string;
 };
 
-const exercises: Exercise[] = [
-  {
-    id: 1,
-    question: "Ni neno gani la kusema 'Habari' kwa Kiingereza?",
-    questionSw: "What does 'Habari' mean in English?",
-    options: ["Hello", "News/How are you", "Goodbye", "Thank you"],
-    correct: 1,
-    explanation: "'Habari' inamaanisha 'News' au 'How are you' kwa Kiingereza. Ni salamu ya kawaida.",
-    explanationSw: "'Habari' means 'News' or 'How are you' in English. It's a common greeting.",
-    type: 'multiple-choice',
-    difficulty: 'easy',
-    category: 'Salamu'
-  },
-  {
-    id: 2,
-    question: "Nambari gani ni 'tatu' kwa Kiswahili?",
-    questionSw: "What number is 'tatu' in Swahili?",
-    options: ["2", "3", "4", "5"],
-    correct: 1,
-    explanation: "'Tatu' ni nambari 3 kwa Kiswahili. Ni mojawapo ya nambari za msingi.",
-    explanationSw: "'Tatu' is the number 3 in Swahili. It's one of the basic numbers.",
-    type: 'multiple-choice',
-    difficulty: 'easy',
-    category: 'Nambari'
-  },
-  {
-    id: 3,
-    question: "Nani ni 'mama' kwa familia?",
-    questionSw: "Who is 'mama' in the family?",
-    options: ["Baba", "Mama", "Mtoto", "Bibi"],
-    correct: 1,
-    explanation: "'Mama' ni mzazi wa kike katika familia. Ni neno la muhimu sana.",
-    explanationSw: "'Mama' is the female parent in the family. It's a very important word.",
-    type: 'multiple-choice',
-    difficulty: 'easy',
-    category: 'Familia'
-  },
-  {
-    id: 4,
-    question: "Rangi gani ni 'nyekundu'?",
-    questionSw: "What color is 'nyekundu'?",
-    options: ["Bluu", "Nyekundu (Red)", "Kijani", "Njano"],
-    correct: 1,
-    explanation: "'Nyekundu' ni rangi nyekundu (red). Ni rangi ya damu na nyanya.",
-    explanationSw: "'Nyekundu' is the color red. It's the color of blood and tomatoes.",
-    type: 'multiple-choice',
-    difficulty: 'easy',
-    category: 'Rangi'
-  },
-  {
-    id: 5,
-    question: "Mnyama gani ni 'simba'?",
-    questionSw: "What animal is 'simba'?",
-    options: ["Tembo", "Simba (Lion)", "Twiga", "Kiboko"],
-    correct: 1,
-    explanation: "'Simba' ni mfalme wa msitu. Ni mnyama mkuu wa Afrika.",
-    explanationSw: "'Simba' is the king of the jungle. It's a major African animal.",
-    type: 'multiple-choice',
-    difficulty: 'medium',
-    category: 'Wanyamapori'
-  }
-];
+const exercises: Exercise[] = [];
 
 const practiceCategories = [
   { name: 'Salamu', icon: '👋', count: 8, color: 'primary' },
@@ -165,33 +104,33 @@ export default function PracticePage() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <Card className="text-center">
+              <Card className="text-center bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
                 <CardContent className="pt-6">
-                  <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Target className="w-6 h-6 text-primary-600" />
+                  <div className="w-12 h-12 bg-sky-200 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Target className="w-6 h-6 text-sky-700 dark:text-sky-300" />
                   </div>
-                  <div className="text-2xl font-bold text-primary-600 dyslexic-text">85%</div>
-                  <p className="text-sm text-gray-600 dyslexic-text">Kiwango cha mafanikio</p>
+                  <div className="text-2xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text">0%</div>
+                  <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">Kiwango cha mafanikio</p>
                 </CardContent>
               </Card>
               
-              <Card className="text-center">
+              <Card className="text-center bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/20 border-violet-200/50 dark:border-violet-700/30">
                 <CardContent className="pt-6">
-                  <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Zap className="w-6 h-6 text-secondary-600" />
+                  <div className="w-12 h-12 bg-violet-200 dark:bg-violet-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Zap className="w-6 h-6 text-violet-700 dark:text-violet-300" />
                   </div>
-                  <div className="text-2xl font-bold text-secondary-600 dyslexic-text">12</div>
-                  <p className="text-sm text-gray-600 dyslexic-text">Mazoezi yamekamilika</p>
+                  <div className="text-2xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text">0</div>
+                  <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">Mazoezi yamekamilika</p>
                 </CardContent>
               </Card>
               
-              <Card className="text-center">
+              <Card className="text-center bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 border-pink-200/50 dark:border-pink-700/30">
                 <CardContent className="pt-6">
-                  <div className="w-12 h-12 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <Trophy className="w-6 h-6 text-success-600" />
+                  <div className="w-12 h-12 bg-pink-200 dark:bg-pink-800 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <Trophy className="w-6 h-6 text-pink-700 dark:text-pink-300" />
                   </div>
-                  <div className="text-2xl font-bold text-success-600 dyslexic-text">7</div>
-                  <p className="text-sm text-gray-600 dyslexic-text">Siku za mfululizo</p>
+                  <div className="text-2xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text">0</div>
+                  <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">Siku za mfululizo</p>
                 </CardContent>
               </Card>
             </div>
@@ -208,41 +147,45 @@ export default function PracticePage() {
               </p>
             </div>
             
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {practiceCategories.map((category, index) => (
-                <Card key={index} className="card-hover cursor-pointer" onClick={startQuiz}>
-                  <CardHeader className="text-center">
-                    <div className="text-4xl mb-4">{category.icon}</div>
-                    <CardTitle className="dyslexic-text">{category.name}</CardTitle>
-                    <CardDescription className="dyslexic-text">
-                      {category.count} maswali
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button className="w-full dyslexic-text" variant={category.color as any}>
-                      <GamepadIcon className="w-4 h-4 mr-2" />
-                      Anza Mazoezi
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {practiceCategories.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-gray-500 dark:text-gray-400 dyslexic-text">
+                  Hakuna mada za mazoezi kwa sasa.
+                </p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {practiceCategories.map((category, index) => (
+                  <Card key={index} className="card-hover cursor-pointer" onClick={startQuiz}>
+                    <CardHeader className="text-center">
+                      <div className="text-4xl mb-4">{category.icon}</div>
+                      <CardTitle className="dyslexic-text">{category.name}</CardTitle>
+                      <CardDescription className="dyslexic-text">
+                        {category.count} maswali
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Button className="w-full dyslexic-text" variant={category.color as any}>
+                        <GamepadIcon className="w-4 h-4 mr-2" />
+                        Anza Mazoezi
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
         {/* Quick Practice */}
         <section className="py-12 bg-white dark:bg-gray-800">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 dyslexic-text">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 dyslexic-text">
               Mazoezi ya Haraka
             </h2>
-            <p className="text-lg text-gray-600 mb-8 dyslexic-text">
-              Fanya mazoezi ya haraka ya dakika 5 tu!
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 dyslexic-text">
+              Hakuna mazoezi ya haraka kwa sasa.
             </p>
-            <Button size="lg" onClick={startQuiz} className="text-lg px-8 py-4 dyslexic-text">
-              <Zap className="w-5 h-5 mr-2" />
-              Anza Mazoezi ya Haraka
-            </Button>
           </div>
         </section>
       </div>

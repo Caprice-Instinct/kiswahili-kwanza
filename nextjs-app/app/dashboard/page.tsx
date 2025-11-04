@@ -59,8 +59,8 @@ export default function Dashboard() {
               <Target className="h-4 w-4 text-pink-600" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold dyslexic-text text-pink-800">75%</div>
-              <Progress value={75} className="mt-2" />
+              <div className="text-2xl font-bold dyslexic-text text-pink-800">0%</div>
+              <Progress value={0} className="mt-2" />
               <p className="text-xs dyslexic-text text-pink-600 mt-1">
                 Kiwango cha 1
               </p>
