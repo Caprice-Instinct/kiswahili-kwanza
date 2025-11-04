@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "init-db": "tsx scripts/init-db.ts",
-    "seed": "tsx scripts/init-db.ts"
+    "seed": "tsx scripts/init-db.ts",
+    "setup-auth": "node scripts/setup-auth.js",
+    "test-auth": "node scripts/test-auth.js"
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.0",

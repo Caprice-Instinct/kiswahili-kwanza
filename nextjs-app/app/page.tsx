@@ -82,12 +82,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Current Progress Section */}
+      {/* Kiswahili History & Fun Facts Section */}
       <section className="py-16 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4 dyslexic-text">Maendeleo Yako</h2>
-            <p className="text-lg text-gray-600 dyslexic-text">Ona jinsi unavyoendelea kujifunza</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 dyslexic-text">Historia ya Kiswahili</h2>
+            <p className="text-lg text-gray-600 dark:text-gray-300 dyslexic-text">Jifunze mambo ya kuvutia kuhusu lugha ya Kiswahili</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -96,15 +96,14 @@ export default function Home() {
                 <div className="w-16 h-16 bg-sky-200 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-4">
                   <BookOpen className="w-8 h-8 text-sky-700 dark:text-sky-300" />
                 </div>
-                <CardTitle className="dyslexic-text text-sky-800 dark:text-sky-200">Masomo</CardTitle>
-                <CardDescription className="dyslexic-text text-sky-600 dark:text-sky-400">Umekamilisha masomo 3 kati ya 12</CardDescription>
+                <CardTitle className="dyslexic-text text-sky-800 dark:text-sky-200">Asili ya Kiswahili</CardTitle>
+                <CardDescription className="dyslexic-text text-sky-600 dark:text-sky-400">Lugha ya Kibantu iliyochanganywa na Kiarabu</CardDescription>
               </CardHeader>
               <CardContent>
-                <Progress value={25} className="mb-4" />
-                <div className="flex justify-between text-sm text-sky-600 dark:text-sky-400 dyslexic-text">
-                  <span>Kiwango 1</span>
-                  <span>25%</span>
-                </div>
+                <p className="text-sm text-sky-700 dark:text-sky-300 dyslexic-text">
+                  Kiswahili kilianza pwani ya Afrika Mashariki karne ya 7-8. 
+                  Wafanyabiashara wa Kiarabu walileta maneno mengi ya Kiarabu.
+                </p>
               </CardContent>
             </Card>
 
@@ -113,30 +112,34 @@ export default function Home() {
                 <div className="w-16 h-16 bg-violet-200 dark:bg-violet-800 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-8 h-8 text-violet-700 dark:text-violet-300" />
                 </div>
-                <CardTitle className="dyslexic-text text-violet-800 dark:text-violet-200">Alama</CardTitle>
-                <CardDescription className="dyslexic-text text-violet-600 dark:text-violet-400">Umepata alama 450 wiki hii</CardDescription>
+                <CardTitle className="dyslexic-text text-violet-800 dark:text-violet-200">Ukweli wa Kufurahisha</CardTitle>
+                <CardDescription className="dyslexic-text text-violet-600 dark:text-violet-400">Mambo ya kushangaza kuhusu Kiswahili</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 mb-2 dyslexic-text">450</div>
-                  <Badge variant="secondary" className="dyslexic-text bg-violet-200 text-violet-800 dark:bg-violet-800 dark:text-violet-200">Kiwango 2</Badge>
+                <div className="space-y-2 text-sm text-violet-700 dark:text-violet-300 dyslexic-text">
+                  <p>🌍 Watu milioni 200+ wanazungumza Kiswahili</p>
+                  <p>🏛️ Ni lugha rasmi ya Umoja wa Afrika</p>
+                  <p>📚 Kuna vitabu 1000+ vya Kiswahili</p>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="card-hover bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 border-pink-200/50 dark:border-pink-700/30">
               <CardHeader className="text-center">
-                <div className="w-16 h-16 bg-pink-200 dark:bg-pink-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Target className="w-8 h-8 text-pink-700 dark:text-pink-300" />
+                <div className="w-16 h-16 bg-pink-200 dark:pink-sky-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Heart className="w-8 h-8 text-pink-700 dark:text-pink-300" />
                 </div>
-                <CardTitle className="dyslexic-text text-pink-800 dark:text-pink-200">Lengo la Leo</CardTitle>
-                <CardDescription className="dyslexic-text text-pink-600 dark:text-pink-400">Jifunze maneno 5 mapya</CardDescription>
+                <CardTitle className="dyslexic-text text-pink-800 dark:text-pink-200">Utani wa Kiswahili</CardTitle>
+                <CardDescription className="dyslexic-text text-pink-600 dark:text-pink-400">Utani wa kuchekesha kwa Kiswahili</CardDescription>
               </CardHeader>
               <CardContent>
-                <Progress value={60} className="mb-4" />
-                <div className="flex justify-between text-sm text-pink-600 dark:text-pink-400 dyslexic-text">
-                  <span>3 kati ya 5</span>
-                  <span>60%</span>
+                <div className="text-center">
+                  <p className="text-sm text-pink-700 dark:text-pink-300 mb-2 dyslexic-text font-medium">
+                    "Kuku wa jirani hawatagi yai!"
+                  </p>
+                  <p className="text-xs text-pink-600 dark:text-pink-400 dyslexic-text">
+                    (Maana: Mtu hawezi kutegemea kitu ambacho si chake!)
+                  </p>
                 </div>
               </CardContent>
             </Card>

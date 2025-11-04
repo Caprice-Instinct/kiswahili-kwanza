@@ -31,8 +31,12 @@ import {
   Bell
 } from 'lucide-react'
 
-const navigationItems = [
+const publicNavigationItems = [
   { href: '/', label: 'Nyumbani', icon: Home },
+]
+
+const authenticatedNavigationItems = [
+  { href: '/dashboard', label: 'Dashibodi', icon: User },
   { href: '/lessons', label: 'Masomo', icon: BookOpen },
   { href: '/practice', label: 'Mazoezi', icon: GamepadIcon },
   { href: '/progress', label: 'Maendeleo', icon: Trophy },
@@ -61,7 +65,7 @@ export function Navigation() {
 
           {/* Main Navigation */}
           <div className="hidden md:flex items-center space-x-1">
-            {navigationItems.map((item) => {
+            {(session ? authenticatedNavigationItems : publicNavigationItems).map((item) => {
               const isActive = pathname === item.href
               const Icon = item.icon
               
@@ -111,7 +115,7 @@ export function Navigation() {
                       <div className="hidden sm:block text-left">
                         <p className="text-sm font-medium text-gray-700 dark:text-gray-300 dyslexic-text">{session.user?.name || 'Mwanafunzi'}</p>
                         <div className="flex items-center space-x-1">
-                          <Badge variant="success" className="text-xs px-2 py-0.5">
+                          <Badge variant="secondary" className="text-xs px-2 py-0.5">
                             Kiwango {session.user?.level || 1}
                           </Badge>
                           <span className="text-xs text-muted-foreground">{session.user?.points || 0} alama</span>
@@ -180,7 +184,7 @@ export function Navigation() {
       {/* Mobile Navigation */}
       <div className="md:hidden border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900">
         <div className="flex justify-around py-2">
-          {navigationItems.map((item) => {
+          {(session ? authenticatedNavigationItems : publicNavigationItems).map((item) => {
             const isActive = pathname === item.href
             const Icon = item.icon
             
