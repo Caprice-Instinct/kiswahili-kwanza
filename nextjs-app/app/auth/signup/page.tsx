@@ -94,7 +94,7 @@ export default function SignUpPage() {
           <p className="text-gray-600 dyslexic-text">Karibu!</p>
         </div>
 
-        <Card className="shadow-lg" style={{background: 'linear-gradient(to bottom right, #f0f9ff, #e0f2fe)', borderColor: '#bae6fd'}}>
+        <Card className="shadow-lg bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
           <CardHeader className="text-center">
             <CardTitle className="text-2xl dyslexic-text">Jisajili</CardTitle>
             <CardDescription className="dyslexic-text">
@@ -107,9 +107,8 @@ export default function SignUpPage() {
               <Button
                 type="button"
                 variant="outline"
-                className="w-full py-3 text-lg dyslexic-text flex items-center justify-center gap-2"
+                className="w-full py-3 text-lg dyslexic-text bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 flex items-center justify-center gap-2"
                 onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
-                style={{backgroundColor: '#ffffff', borderColor: '#d1d5db'}}
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                   <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -122,10 +121,10 @@ export default function SignUpPage() {
               
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t" style={{borderColor: '#bae6fd'}} />
+                  <span className="w-full border-t border-sky-200 dark:border-sky-700" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="px-2 dyslexic-text" style={{backgroundColor: '#f0f9ff', color: '#0284c7'}}>Au</span>
+                  <span className="px-2 dyslexic-text bg-sky-50 dark:bg-sky-900/20 text-sky-700 dark:text-sky-300">Au</span>
                 </div>
               </div>
             </div>
@@ -262,6 +261,19 @@ export default function SignUpPage() {
                 Tayari una akaunti?{' '}
                 <Link href="/auth/signin" className="text-primary-600 hover:text-primary-700 font-medium">
                   Ingia hapa
+                </Link>
+              </p>
+            </div>
+
+            <div className="mt-4 text-center">
+              <p className="text-xs text-gray-500 dyslexic-text">
+                Kwa kujisajili, unakubali{' '}
+                <Link href="/terms" className="text-primary-600 hover:text-primary-700 underline">
+                  Masharti na Hali
+                </Link>
+                {' '}na{' '}
+                <Link href="/privacy" className="text-primary-600 hover:text-primary-700 underline">
+                  Sera ya Faragha
                 </Link>
               </p>
             </div>

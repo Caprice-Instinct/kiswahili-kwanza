@@ -5,21 +5,21 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
         default: "bg-primary-500 text-white hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700",
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-red-500 text-white hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700",
         outline:
-          "border border-gray-300 bg-white hover:bg-sky-50 hover:text-sky-700 dark:border-gray-600 dark:bg-gray-800 dark:hover:bg-sky-900/20 dark:hover:text-sky-300",
+          "border border-primary-300 bg-white hover:bg-primary-50 hover:text-primary-700 dark:border-primary-600 dark:bg-gray-800 dark:hover:bg-primary-900/20 dark:hover:text-primary-300",
         secondary:
           "bg-secondary-500 text-white hover:bg-secondary-600 dark:bg-secondary-600 dark:hover:bg-secondary-700",
         ghost: "hover:bg-primary-50 hover:text-primary-700 dark:hover:bg-primary-900/20 dark:hover:text-primary-300",
         link: "text-primary-500 underline-offset-4 hover:underline dark:text-primary-400",
         success: "bg-success-500 text-white hover:bg-success-600 dark:bg-success-600 dark:hover:bg-success-700",
-        warning: "bg-warning-500 text-white hover:bg-warning-600 dark:bg-warning-600 dark:hover:bg-warning-700",
+        warning: "bg-secondary-500 text-white hover:bg-secondary-600 dark:bg-secondary-600 dark:hover:bg-secondary-700",
       },
       size: {
         default: "h-10 px-4 py-2",

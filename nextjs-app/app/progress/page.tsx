@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+import { useSession } from 'next-auth/react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
@@ -20,16 +22,23 @@ import {
   Volume2
 } from "lucide-react"
 
-const weeklyProgress: any[] = []
-const achievements: any[] = []
-const skillsProgress: any[] = []
-
 export default function ProgressPage() {
-  const totalLessons = 0
-  const totalExercises = 0
-  const totalMinutes = 0
-  const earnedAchievements = 0
-  const streakDays = 0
+  const { data: session } = useSession()
+  const [progress, setProgress] = useState<any>(null)
+  const [stats, setStats] = useState<any>(null)
+
+  useEffect(() => {
+    if (session) {
+      fetch('/api/progress')
+        .then(res => res.json())
+        .then(data => setProgress(data))
+    }
+  }, [session])
+
+  const completedLessons = progress?.progress?.filter((p: any) => p.completed).length || 0
+  const totalStars = progress?.progress?.reduce((sum: number, p: any) => sum + (p.stars || 0), 0) || 0
+  const totalWords = completedLessons * 5 // Estimate 5 words per lesson
+  const streakDays = session?.user?.streak || 0
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800">
@@ -53,8 +62,8 @@ export default function ProgressPage() {
               <div className="w-12 h-12 bg-sky-200 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <BookOpen className="w-6 h-6 text-sky-700 dark:text-sky-300" />
               </div>
-              <div className="text-3xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text">{totalLessons}</div>
-              <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">Masomo wiki hii</p>
+              <div className="text-3xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text">{completedLessons}</div>
+              <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">Masomo yamekamilika</p>
             </CardContent>
           </Card>
           
@@ -63,8 +72,8 @@ export default function ProgressPage() {
               <div className="w-12 h-12 bg-violet-200 dark:bg-violet-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <GamepadIcon className="w-6 h-6 text-violet-700 dark:text-violet-300" />
               </div>
-              <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text">{totalExercises}</div>
-              <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">Mazoezi yamefanywa</p>
+              <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text">{totalStars}</div>
+              <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">Nyota zilizopata</p>
             </CardContent>
           </Card>
           
@@ -73,8 +82,8 @@ export default function ProgressPage() {
               <div className="w-12 h-12 bg-pink-200 dark:bg-pink-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Clock className="w-6 h-6 text-pink-700 dark:text-pink-300" />
               </div>
-              <div className="text-3xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text">{totalMinutes}</div>
-              <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">Dakika za kujifunza</p>
+              <div className="text-3xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text">{totalWords}</div>
+              <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">Maneno yamejifunza</p>
             </CardContent>
           </Card>
           
@@ -147,14 +156,14 @@ export default function ProgressPage() {
                 <div className="w-20 h-20 bg-gradient-to-br from-sky-500 to-violet-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 dyslexic-text">Kiwango 1</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 dyslexic-text">Mwanzo</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 dyslexic-text">Kiwango {session?.user?.level || 1}</h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 dyslexic-text">Kiwango chako</p>
                 <div className="mb-4">
-                  <Progress value={0} className="mb-2" />
-                  <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">0% hadi Kiwango 2</p>
+                  <Progress value={completedLessons * 10} className="mb-2" />
+                  <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">{completedLessons * 10}% hadi Kiwango {(session?.user?.level || 1) + 1}</p>
                 </div>
                 <Badge variant="secondary" className="dyslexic-text">
-                  0 alama
+                  {session?.user?.points || 0} alama
                 </Badge>
               </CardContent>
             </Card>
@@ -167,7 +176,7 @@ export default function ProgressPage() {
                   <span>Mafanikio</span>
                 </CardTitle>
                 <CardDescription className="dyslexic-text">
-                  {earnedAchievements} kati ya {achievements.length} yamepata
+                  0 kati ya 0 yamepata
                 </CardDescription>
               </CardHeader>
               <CardContent>

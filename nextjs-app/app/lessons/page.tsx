@@ -157,56 +157,14 @@ export default function LessonsPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800">
-      {/* Header Stats */}
+      {/* Header */}
       <section className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
+          <div className="text-center">
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 dyslexic-text">Masomo ya Kiswahili</h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 dyslexic-text max-w-2xl mx-auto">
               Chagua somo ili kuanza safari yako ya kujifunza Kiswahili
             </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <BookOpen className="w-6 h-6 text-primary-600" />
-                </div>
-                <div className="text-2xl font-bold text-primary-600 dark:text-primary-400 dyslexic-text">{completedLessons}</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">Masomo yamekamilika</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Star className="w-6 h-6 text-secondary-600" />
-                </div>
-                <div className="text-2xl font-bold text-secondary-600 dark:text-secondary-400 dyslexic-text">{totalStars}</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">Nyota zilizopata</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Target className="w-6 h-6 text-success-600" />
-                </div>
-                <div className="text-2xl font-bold text-success-600 dark:text-success-400 dyslexic-text">{totalWords}</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">Maneno yamejifunza</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="text-center">
-              <CardContent className="pt-6">
-                <div className="w-12 h-12 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Trophy className="w-6 h-6 text-warning-600" />
-                </div>
-                <div className="text-2xl font-bold text-warning-600 dark:text-warning-400 dyslexic-text">Kiwango 2</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">Kiwango chako</p>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
@@ -313,35 +271,91 @@ export default function LessonsPage() {
                   
                   {/* Action Button */}
                   <Button 
-                    className="w-full dyslexic-text" 
+                    className="w-full dyslexic-text"
+                    variant={lesson.unlocked ? (lesson.completed ? "secondary" : "default") : "outline"}
                     disabled={!lesson.unlocked}
-                    variant={lesson.completed ? "secondary" : "default"}
+                    asChild={lesson.unlocked}
                   >
-                    {!lesson.unlocked ? (
-                      <>
-                        <Lock className="w-4 h-4 mr-2" />
-                        Imefungwa
-                      </>
-                    ) : lesson.completed ? (
-                      <>
-                        <CheckCircle className="w-4 h-4 mr-2" />
-                        Rudia
-                      </>
-                    ) : lesson.progress > 0 ? (
-                      <>
-                        <Play className="w-4 h-4 mr-2" />
-                        Endelea
-                      </>
+                    {lesson.unlocked ? (
+                      <Link href={`/lessons/${lesson.id}`}>
+                        <div className="flex items-center justify-center space-x-2">
+                          {lesson.completed ? (
+                            <>
+                              <CheckCircle className="w-4 h-4" />
+                              <span>Rudia</span>
+                            </>
+                          ) : lesson.progress > 0 ? (
+                            <>
+                              <Play className="w-4 h-4" />
+                              <span>Endelea</span>
+                            </>
+                          ) : (
+                            <>
+                              <Play className="w-4 h-4" />
+                              <span>Anza</span>
+                            </>
+                          )}
+                        </div>
+                      </Link>
                     ) : (
-                      <>
-                        <Play className="w-4 h-4 mr-2" />
-                        Anza
-                      </>
+                      <div className="flex items-center justify-center space-x-2">
+                        <Lock className="w-4 h-4" />
+                        <span>Imefungwa</span>
+                      </div>
                     )}
                   </Button>
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Progress Summary */}
+      <section className="py-12 bg-white dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8">
+            <Card className="text-center bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
+              <CardContent className="pt-6">
+                <div className="w-16 h-16 bg-sky-200 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Trophy className="w-8 h-8 text-sky-700 dark:text-sky-300" />
+                </div>
+                <div className="text-3xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text mb-2">
+                  {completedLessons}
+                </div>
+                <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">
+                  Masomo yamekamilika
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/20 border-violet-200/50 dark:border-violet-700/30">
+              <CardContent className="pt-6">
+                <div className="w-16 h-16 bg-violet-200 dark:bg-violet-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Star className="w-8 h-8 text-violet-700 dark:text-violet-300" />
+                </div>
+                <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text mb-2">
+                  {totalStars}
+                </div>
+                <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">
+                  Nyota zilizopata
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 border-pink-200/50 dark:border-pink-700/30">
+              <CardContent className="pt-6">
+                <div className="w-16 h-16 bg-pink-200 dark:bg-pink-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Volume2 className="w-8 h-8 text-pink-700 dark:text-pink-300" />
+                </div>
+                <div className="text-3xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text mb-2">
+                  {totalWords}
+                </div>
+                <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">
+                  Maneno yamejifunza
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>

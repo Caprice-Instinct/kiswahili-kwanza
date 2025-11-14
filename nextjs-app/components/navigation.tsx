@@ -123,34 +123,34 @@ export function Navigation() {
                       </div>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent className="w-56" align="end">
-                    <DropdownMenuLabel className="dyslexic-text">
+                  <DropdownMenuContent className="w-56 bg-white dark:bg-gray-800 border-primary-200 dark:border-gray-700" align="end">
+                    <DropdownMenuLabel className="dyslexic-text text-gray-900 dark:text-gray-100">
                       {session.user?.name || 'Mwanafunzi'}
                     </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem className="dyslexic-text">
+                    <DropdownMenuSeparator className="bg-primary-200 dark:bg-gray-600" />
+                    <DropdownMenuItem className="dyslexic-text text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20">
                       <User className="mr-2 h-4 w-4" />
                       <span>Wasifu Wangu</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="dyslexic-text">
+                    <DropdownMenuItem className="dyslexic-text text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20">
                       <Settings className="mr-2 h-4 w-4" />
                       <span>Mipangilio</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="dyslexic-text">
+                    <DropdownMenuItem className="dyslexic-text text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20">
                       <Bell className="mr-2 h-4 w-4" />
                       <span>Arifa</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="dyslexic-text">
+                    <DropdownMenuItem className="dyslexic-text text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20">
                       <Shield className="mr-2 h-4 w-4" />
                       <span>Usalama</span>
                     </DropdownMenuItem>
-                    <DropdownMenuItem className="dyslexic-text">
+                    <DropdownMenuItem className="dyslexic-text text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-primary-900/20 focus:bg-primary-50 dark:focus:bg-primary-900/20">
                       <HelpCircle className="mr-2 h-4 w-4" />
                       <span>Msaada</span>
                     </DropdownMenuItem>
-                    <DropdownMenuSeparator />
+                    <DropdownMenuSeparator className="bg-primary-200 dark:bg-gray-600" />
                     <DropdownMenuItem 
-                      className="dyslexic-text text-red-600 dark:text-red-400" 
+                      className="dyslexic-text text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 focus:bg-red-50 dark:focus:bg-red-900/20" 
                       onClick={() => signOut()}
                     >
                       <LogOut className="mr-2 h-4 w-4" />
