@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Question, QuizOption } from '@/types/quiz';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Volume2, HelpCircle, Clock } from 'lucide-react';
+import { useState } from "react";
+import { Question, QuizOption } from "@/types/quiz";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Volume2, HelpCircle, Clock } from "lucide-react";
 
 interface QuizQuestionProps {
   question: Question;
@@ -28,7 +28,7 @@ export function QuizQuestion({
   onNext,
   onPrevious,
   showHints = false,
-  timeRemaining
+  timeRemaining,
 }: QuizQuestionProps) {
   const [showHint, setShowHint] = useState(false);
 
@@ -41,21 +41,21 @@ export function QuizQuestion({
 
   const renderQuestionContent = () => {
     switch (question.type) {
-      case 'multiple-choice':
+      case "multiple-choice":
         return (
           <div className="space-y-3">
             {question.options?.map((option) => (
               <Button
                 key={option.id}
-                variant={selectedAnswer === option.id ? 'default' : 'outline'}
+                variant={selectedAnswer === option.id ? "default" : "outline"}
                 className="w-full justify-start text-left h-auto p-4"
                 onClick={() => onAnswerSelect(option.id)}
               >
                 <div className="flex items-center gap-3">
                   <span>{option.text}</span>
                   {option.audioUrl && (
-                    <Volume2 
-                      className="w-4 h-4 cursor-pointer" 
+                    <Volume2
+                      className="w-4 h-4 cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         playAudio(option.audioUrl);
@@ -68,33 +68,33 @@ export function QuizQuestion({
           </div>
         );
 
-      case 'fill-blank':
+      case "fill-blank":
         return (
           <div className="space-y-4">
             <input
               type="text"
               className="w-full p-3 border rounded-lg"
               placeholder="Andika jibu lako hapa..."
-              value={selectedAnswer as string || ''}
+              value={(selectedAnswer as string) || ""}
               onChange={(e) => onAnswerSelect(e.target.value)}
             />
           </div>
         );
 
-      case 'true-false':
+      case "true-false":
         return (
           <div className="flex gap-4">
             <Button
-              variant={selectedAnswer === 'true' ? 'default' : 'outline'}
+              variant={selectedAnswer === "true" ? "default" : "outline"}
               className="flex-1"
-              onClick={() => onAnswerSelect('true')}
+              onClick={() => onAnswerSelect("true")}
             >
               Kweli (True)
             </Button>
             <Button
-              variant={selectedAnswer === 'false' ? 'default' : 'outline'}
+              variant={selectedAnswer === "false" ? "default" : "outline"}
               className="flex-1"
-              onClick={() => onAnswerSelect('false')}
+              onClick={() => onAnswerSelect("false")}
             >
               Si kweli (False)
             </Button>
@@ -116,7 +116,8 @@ export function QuizQuestion({
           {timeRemaining && (
             <div className="flex items-center gap-1 text-sm text-gray-600">
               <Clock className="w-4 h-4" />
-              {Math.floor(timeRemaining / 60)}:{(timeRemaining % 60).toString().padStart(2, '0')}
+              {Math.floor(timeRemaining / 60)}:
+              {(timeRemaining % 60).toString().padStart(2, "0")}
             </div>
           )}
         </div>
@@ -124,8 +125,8 @@ export function QuizQuestion({
           <div className="flex items-center gap-3">
             <span>{question.question}</span>
             {question.questionAudio && (
-              <Volume2 
-                className="w-5 h-5 cursor-pointer text-blue-600" 
+              <Volume2
+                className="w-5 h-5 cursor-pointer text-blue-600"
                 onClick={() => playAudio(question.questionAudio)}
               />
             )}
@@ -138,14 +139,6 @@ export function QuizQuestion({
       </CardHeader>
 
       <CardContent className="space-y-6">
-        {question.questionImage && (
-          <img 
-            src={question.questionImage} 
-            alt="Question visual" 
-            className="w-full max-w-md mx-auto rounded-lg"
-          />
-        )}
-
         {renderQuestionContent()}
 
         {showHints && question.hints && question.hints.length > 0 && (
@@ -157,7 +150,7 @@ export function QuizQuestion({
               className="flex items-center gap-2"
             >
               <HelpCircle className="w-4 h-4" />
-              {showHint ? 'Ficha kidokezo' : 'Onyesha kidokezo'}
+              {showHint ? "Ficha kidokezo" : "Onyesha kidokezo"}
             </Button>
             {showHint && (
               <div className="p-3 bg-blue-50 rounded-lg text-sm text-blue-800">
@@ -173,12 +166,12 @@ export function QuizQuestion({
               Nyuma
             </Button>
           )}
-          <Button 
+          <Button
             onClick={onNext}
             disabled={!selectedAnswer}
             className="ml-auto"
           >
-            {questionNumber === totalQuestions ? 'Maliza' : 'Ifuatayo'}
+            {questionNumber === totalQuestions ? "Maliza" : "Ifuatayo"}
           </Button>
         </div>
       </CardContent>

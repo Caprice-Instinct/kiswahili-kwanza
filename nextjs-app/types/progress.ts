@@ -1,3 +1,16 @@
+// Reading/story progress for lessons
+export interface ReadingProgress {
+  _id?: string;
+  userId: string;
+  lessonId: string;
+  flashcardsCompleted?: boolean;
+  storyCompleted?: boolean;
+  lastAttempt?: Date;
+  completedAt?: Date;
+  attempts?: number;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 export interface UserProgress {
   userId: string;
   categoryProgress: CategoryProgress[];
@@ -28,13 +41,15 @@ export interface FlashcardSession {
 export const FLASHCARD_COMPLETION_THRESHOLD = 80; // 80% to unlock stories
 export const STORY_COMPLETION_THRESHOLD = 100; // Must read entire story
 
-export const getInitialCategoryProgress = (categoryId: string): CategoryProgress => ({
+export const getInitialCategoryProgress = (
+  categoryId: string
+): CategoryProgress => ({
   categoryId,
   flashcardsCompleted: false,
   flashcardScore: 0,
   storyUnlocked: false,
   storyCompleted: false,
-  attempts: 0
+  attempts: 0,
 });
 
 export const updateFlashcardProgress = (
@@ -48,7 +63,7 @@ export const updateFlashcardProgress = (
     flashcardsCompleted: completed,
     storyUnlocked: completed,
     attempts: progress.attempts + 1,
-    completedAt: completed ? new Date() : progress.completedAt
+    completedAt: completed ? new Date() : progress.completedAt,
   };
 };
 
@@ -58,5 +73,5 @@ export const updateStoryProgress = (
 ): CategoryProgress => ({
   ...progress,
   storyCompleted: completed,
-  completedAt: completed ? new Date() : progress.completedAt
+  completedAt: completed ? new Date() : progress.completedAt,
 });

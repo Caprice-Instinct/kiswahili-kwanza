@@ -12,15 +12,9 @@ export interface Story {
 export const CATEGORY_STORIES: Story[] = [
   {
     categoryId: "nambari",
-    title: "Juma na Nambari za Sokoni",
-    titleEnglish: "Juma and Numbers at the Market",
-    content: `Juma ni mtoto mzuri wa miaka nane. Leo anaenda sokoni pamoja na mama yake. Mama anasema, "Juma, tunahitaji kununua vitu vingi leo."
-
-Kwanza, wanaenda kwa muuzaji wa mayai. "Nataka mayai <span class="highlight" data-english="ten">kumi</span>," mama anasema. Juma anahesabu: "<span class="highlight" data-english="one">Moja</span>, <span class="highlight" data-english="two">mbili</span>, <span class="highlight" data-english="three">tatu</span>, <span class="highlight" data-english="four">nne</span>, <span class="highlight" data-english="five">tano</span>, <span class="highlight" data-english="six">sita</span>, <span class="highlight" data-english="seven">saba</span>, <span class="highlight" data-english="eight">nane</span>, <span class="highlight" data-english="nine">tisa</span>, <span class="highlight" data-english="ten">kumi</span>!"
-
-Baadaye, wanaenda kwa muuzaji wa mikate. "Tunataka mikate <span class="highlight" data-english="five">tano</span>," mama anasema. Juma anafurahi kujua nambari zote.
-
-Mwishowe, mama anasema, "Juma, umejifunza nambari vizuri sana leo!"`,
+    title: "Safari ya Nambari za Juma",
+    titleEnglish: "Juma's Number Adventure",
+    content: `Juma alipata <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="one">moja</span> shilingi barabarani. Alikimbia nyumbani na kuonyesha mama yake. "Tafuta <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="two">mbili</span> za ziada, utanunua pipi," mama alisema. Juma aliona <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="three">tatu</span> za chuma chini ya meza. Sasa ana <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="four">nne</span> shilingi! Alimwita kaka yake, "Tuna <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="five">tano</span> shilingi pamoja!" Kaka yake akaleta <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="six">sita</span> za ziada. Sasa wana <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="seven">saba</span> shilingi. Walinunua pipi <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="eight">nane</span> na wakabaki na <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="nine">tisa</span> shilingi. Mwisho wa siku, walikuwa na <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="ten">kumi</span> za akiba!`,
     highlightedWords: [
       { kiswahili: "moja", english: "one" },
       { kiswahili: "mbili", english: "two" },
@@ -31,26 +25,14 @@ Mwishowe, mama anasema, "Juma, umejifunza nambari vizuri sana leo!"`,
       { kiswahili: "saba", english: "seven" },
       { kiswahili: "nane", english: "eight" },
       { kiswahili: "tisa", english: "nine" },
-      { kiswahili: "kumi", english: "ten" }
-    ]
+      { kiswahili: "kumi", english: "ten" },
+    ],
   },
   {
     categoryId: "rangi",
-    title: "Juma na Rangi za Sokoni",
-    titleEnglish: "Juma and Colors at the Market",
-    content: `Juma anaenda sokoni na mama yake. Sokoni kuna rangi nyingi za kupendeza!
-
-"Ona Juma," mama anasema, "nyanya hizi ni <span class="highlight" data-english="red">nyekundu</span> sana!" Juma anaona nyanya <span class="highlight" data-english="red">nyekundu</span> za kupendeza.
-
-Kando yake kuna mahindi ya <span class="highlight" data-english="yellow">njano</span>. "Mahindi haya ya <span class="highlight" data-english="yellow">njano</span> ni mazuri," mama anasema.
-
-Mbele yao kuna mboga za <span class="highlight" data-english="green">kijani</span>. Sukuma wiki na kabichi vyote ni <span class="highlight" data-english="green">kijani</span>.
-
-Muuzaji ana kofia <span class="highlight" data-english="blue">buluu</span> na nguo <span class="highlight" data-english="white">nyeupe</span>. Miguu yake ina viatu <span class="highlight" data-english="black">nyeusi</span>.
-
-"Nataka kununua maua ya <span class="highlight" data-english="pink">waridi</span>," mama anasema. Maua ya <span class="highlight" data-english="pink">waridi</span> ni mazuri sana.
-
-Juma anafurahi kuona rangi zote hizi sokoni!`,
+    title: "Siku ya Rangi Shuleni",
+    titleEnglish: "Color Day at School",
+    content: `Shuleni kwa Juma, walivaa mavazi ya rangi tofauti. Alichagua shati <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="red">nyekundu</span> na suruali <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="black">nyeusi</span>. Rafiki yake Amina alivaa gauni <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="white">nyeupe</span>. Walipaka rangi <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="green">kijani</span> kwenye mchoro wa miti. Mwalimu alileta kalamu <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="blue">buluu</span> na karatasi <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="yellow">njano</span>. Baadaye, waliona meza ya mbao <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="brown">kahawia</span> na maua <span class="highlight" style="font-weight:bold;color:#2563eb;background:#e0e7ff;padding:2px 6px;border-radius:4px;" data-english="pink">waridi</span> darasani. Ilikuwa siku ya rangi nyingi!`,
     highlightedWords: [
       { kiswahili: "nyekundu", english: "red" },
       { kiswahili: "nyeusi", english: "black" },
@@ -59,26 +41,14 @@ Juma anafurahi kuona rangi zote hizi sokoni!`,
       { kiswahili: "buluu", english: "blue" },
       { kiswahili: "njano", english: "yellow" },
       { kiswahili: "kahawia", english: "brown" },
-      { kiswahili: "waridi", english: "pink" }
-    ]
+      { kiswahili: "waridi", english: "pink" },
+    ],
   },
   {
     categoryId: "familia_ndogo",
-    title: "Juma na Familia Yake Sokoni",
-    titleEnglish: "Juma and His Family at the Market",
-    content: `Leo ni siku ya jumamosi. Juma anaenda sokoni pamoja na familia yake yote.
-
-<span class="highlight" data-english="Mother">Mama</span> yake anabeba mkoba mkubwa. <span class="highlight" data-english="Father">Baba</span> yake anabeba pesa za kununulia chakula.
-
-<span class="highlight" data-english="Sister">Dada</span> yake Amina ni <span class="highlight" data-english="child">mtoto</span> mdogo. Yeye ni <span class="highlight" data-english="son/daughter">mwana</span> wa pili katika familia.
-
-<span class="highlight" data-english="Brother">Kaka</span> yake Omari ni mkubwa kuliko Juma. Yeye ni <span class="highlight" data-english="son/daughter">mwana</span> wa kwanza.
-
-Sokoni wanakutana na <span class="highlight" data-english="grandmother">bibi</span> yao. <span class="highlight" data-english="Grandmother">Bibi</span> anafurahi kuwaona. "Wapi <span class="highlight" data-english="grandfather">babu</span>?" Juma anauliza.
-
-"<span class="highlight" data-english="Grandfather">Babu</span> yu nyumbani," <span class="highlight" data-english="grandmother">bibi</span> anasema.
-
-Familia ya Juma ni ndogo lakini wanapendeana sana. Kila <span class="highlight" data-english="child">mtoto</span> anapendwa na wazazi wake.`,
+    title: "Siku ya Familia ya Juma",
+    titleEnglish: "Juma's Family Day",
+    content: `Juma ana <span class="highlight" data-english="mother">mama</span> na <span class="highlight" data-english="father">baba</span> wanaompenda. Kila asubuhi, <span class="highlight" data-english="mother">mama</span> humwandalia chai. <span class="highlight" data-english="father">Baba</span> humpeleka shule. <span class="highlight" data-english="child">Mtoto</span> mdogo wa jirani anacheza nao. <span class="highlight" data-english="son/daughter">Mwana</span> wa pili ni dada yake. <span class="highlight" data-english="brother">Kaka</span> na <span class="highlight" data-english="sister">dada</span> wanamsaidia kufanya kazi. Jioni, <span class="highlight" data-english="grandmother">bibi</span> na <span class="highlight" data-english="grandfather">babu</span> wanakuja kutembelea familia yao.`,
     highlightedWords: [
       { kiswahili: "mama", english: "mother" },
       { kiswahili: "baba", english: "father" },
@@ -87,8 +57,8 @@ Familia ya Juma ni ndogo lakini wanapendeana sana. Kila <span class="highlight" 
       { kiswahili: "kaka", english: "brother" },
       { kiswahili: "dada", english: "sister" },
       { kiswahili: "bibi", english: "grandmother" },
-      { kiswahili: "babu", english: "grandfather" }
-    ]
+      { kiswahili: "babu", english: "grandfather" },
+    ],
   },
   {
     categoryId: "siku_za_wiki",
@@ -116,8 +86,8 @@ Familia ya Juma ni ndogo lakini wanapendeana sana. Kila <span class="highlight" 
       { kiswahili: "Jumatano", english: "Wednesday" },
       { kiswahili: "Alhamisi", english: "Thursday" },
       { kiswahili: "Ijumaa", english: "Friday" },
-      { kiswahili: "Jumamosi", english: "Saturday" }
-    ]
+      { kiswahili: "Jumamosi", english: "Saturday" },
+    ],
   },
   {
     categoryId: "matunda",
@@ -146,8 +116,8 @@ Mama ananunua pia <span class="highlight" data-english="papaya">papai</span>, <s
       { kiswahili: "embe", english: "mango" },
       { kiswahili: "papai", english: "papaya" },
       { kiswahili: "tikiti maji", english: "watermelon" },
-      { kiswahili: "zabibu", english: "grapes" }
-    ]
+      { kiswahili: "zabibu", english: "grapes" },
+    ],
   },
   {
     categoryId: "familia_kubwa",
@@ -177,8 +147,8 @@ Familia kubwa inapenda kukutana sokoni. Wote wanapendeana na kusaidiana.`,
       { kiswahili: "mpwa", english: "nephew/niece" },
       { kiswahili: "kambo", english: "step-parent" },
       { kiswahili: "mama mkubwa", english: "elder aunt" },
-      { kiswahili: "baba mdogo", english: "younger uncle" }
-    ]
+      { kiswahili: "baba mdogo", english: "younger uncle" },
+    ],
   },
   {
     categoryId: "miezi_ya_mwaka",
@@ -211,7 +181,7 @@ Familia kubwa inapenda kukutana sokoni. Wote wanapendeana na kusaidiana.`,
       { kiswahili: "Septemba", english: "September" },
       { kiswahili: "Oktoba", english: "October" },
       { kiswahili: "Novemba", english: "November" },
-      { kiswahili: "Desemba", english: "December" }
-    ]
-  }
+      { kiswahili: "Desemba", english: "December" },
+    ],
+  },
 ];
