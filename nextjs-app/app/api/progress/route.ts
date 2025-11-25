@@ -14,15 +14,26 @@ export async function GET() {
     const db = await getDatabase()
     const userId = new ObjectId(session.user.id)
 
-    const progress = await db.collection(collections.userProgress)
+    const user = await db.collection('users').findOne({ _id: userId })
+    const progress = await db.collection('user_progress')
       .find({ userId })
       .toArray()
 
-    const dailyProgress = await db.collection(collections.dailyProgress)
+    const dailyProgress = await db.collection('daily_progress')
       .findOne({ userId, date: { $gte: new Date(new Date().setHours(0,0,0,0)) } })
 
-    return NextResponse.json({ progress, dailyProgress })
+    return NextResponse.json({ 
+      progress, 
+      dailyProgress,
+      user: {
+        level: user?.level || 1,
+        points: user?.points || 0,
+        streak: user?.streak || 0,
+        stats: user?.stats || {}
+      }
+    })
   } catch (error) {
+    console.error('Progress API error:', error)
     return NextResponse.json({ error: 'Failed to fetch progress' }, { status: 500 })
   }
 }

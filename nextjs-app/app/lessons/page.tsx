@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { MASOMO_CATEGORIES } from "@/types/masomo";
 
 import { 
   BookOpen, 
@@ -19,136 +20,22 @@ import {
   Target
 } from "lucide-react";
 
-const lessons = [
-  {
-    id: 1,
-    title: "Salamu na Utambulisho",
-    titleEn: "Greetings & Introductions",
-    description: "Jifunze salamu za kimsingi na jinsi ya kujitambulisha",
-    level: "Mwanzo",
-    levelColor: "success",
-    duration: "10 dakika",
-    topics: ["Habari", "Jambo", "Jina langu ni..."],
-    completed: true,
-    progress: 100,
-    stars: 3,
-    words: 15,
-    exercises: 8,
-    unlocked: true
-  },
-  {
-    id: 2,
-    title: "Nambari na Kuhesabu",
-    titleEn: "Numbers & Counting",
-    description: "Jifunze nambari kutoka 1-20 na jinsi ya kuhesabu",
-    level: "Mwanzo",
-    levelColor: "success",
-    duration: "12 dakika",
-    topics: ["1-10", "11-20", "Kuhesabu vitu"],
-    completed: true,
-    progress: 100,
-    stars: 2,
-    words: 20,
-    exercises: 10,
-    unlocked: true
-  },
-  {
-    id: 3,
-    title: "Familia na Uhusiano",
-    titleEn: "Family & Relationships",
-    description: "Maneno ya wanafamilia na uhusiano",
-    level: "Mwanzo",
-    levelColor: "success",
-    duration: "15 dakika",
-    topics: ["Mama, Baba", "Ndugu", "Familia kubwa"],
-    completed: false,
-    progress: 60,
-    stars: 0,
-    words: 18,
-    exercises: 12,
-    unlocked: true
-  },
-  {
-    id: 4,
-    title: "Vitendo vya Kila Siku",
-    titleEn: "Daily Actions",
-    description: "Vitendo muhimu vya kila siku",
-    level: "Kati",
-    levelColor: "warning",
-    duration: "18 dakika",
-    topics: ["Kula", "Kunywa", "Kulala", "Kucheza"],
-    completed: false,
-    progress: 0,
-    stars: 0,
-    words: 25,
-    exercises: 15,
-    unlocked: true
-  },
-  {
-    id: 5,
-    title: "Rangi na Umbo",
-    titleEn: "Colors & Shapes",
-    description: "Jifunze rangi mbalimbali na maumbo",
-    level: "Mwanzo",
-    levelColor: "success",
-    duration: "10 dakika",
-    topics: ["Nyekundu", "Bluu", "Duara", "Mraba"],
-    completed: false,
-    progress: 0,
-    stars: 0,
-    words: 16,
-    exercises: 8,
-    unlocked: false
-  },
-  {
-    id: 6,
-    title: "Wanyamapori",
-    titleEn: "Animals",
-    description: "Majina ya wanyamapori wa Afrika",
-    level: "Mwanzo",
-    levelColor: "success",
-    duration: "14 dakika",
-    topics: ["Simba", "Tembo", "Twiga", "Kiboko"],
-    completed: false,
-    progress: 0,
-    stars: 0,
-    words: 22,
-    exercises: 11,
-    unlocked: false
-  },
-  {
-    id: 7,
-    title: "Chakula na Kinywaji",
-    titleEn: "Food & Drinks",
-    description: "Aina za chakula na vinywaji",
-    level: "Kati",
-    levelColor: "warning",
-    duration: "16 dakika",
-    topics: ["Ugali", "Nyama", "Maji", "Maziwa"],
-    completed: false,
-    progress: 0,
-    stars: 0,
-    words: 20,
-    exercises: 13,
-    unlocked: false
-  },
-  {
-    id: 8,
-    title: "Mazingira",
-    titleEn: "Environment",
-    description: "Mazingira na hali ya anga",
-    level: "Kati",
-    levelColor: "warning",
-    duration: "20 dakika",
-    topics: ["Jua", "Mvua", "Mti", "Bahari"],
-    completed: false,
-    progress: 0,
-    stars: 0,
-    words: 24,
-    exercises: 16,
-    unlocked: false
-  }
-];
+const lessons = MASOMO_CATEGORIES.map((category, index) => ({
+  id: index + 1,
+  title: category.title,
+  titleEn: category.titleEnglish,
+  description: category.description,
+  level: category.difficulty <= 2 ? "Mwanzo" : category.difficulty <= 4 ? "Kati" : "Juu",
+  levelColor: category.difficulty <= 2 ? "success" : category.difficulty <= 4 ? "warning" : "destructive",
+  duration: `${10 + category.difficulty * 2} dakika`,
+  topics: category.content.slice(0, 3).map(item => item.kiswahili),
+  completed: false,
+  progress: 0,
+  stars: 0,
+  words: category.content.length,
+  exercises: Math.ceil(category.content.length * 1.2),
+  unlocked: !category.locked
+}));
 
 export default function LessonsPage() {
   const completedLessons = lessons.filter(lesson => lesson.completed).length;

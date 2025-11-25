@@ -12,10 +12,49 @@ import { Heart, Mail, Lock, Eye, EyeOff } from 'lucide-react'
 export default function SignInPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [otp, setOtp] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showOtpForm, setShowOtpForm] = useState(false)
   const router = useRouter()
+
+  const handleOtpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsLoading(true)
+    setError('')
+
+    try {
+      const verifyResponse = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp })
+      })
+
+      if (!verifyResponse.ok) {
+        const data = await verifyResponse.json()
+        setError(data.error || 'Msimbo si sahihi')
+        return
+      }
+
+      const result = await signIn('credentials', {
+        email,
+        password: 'verified',
+        otp,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        setError('Kuingia kumeshindikana')
+      } else {
+        window.location.href = '/dashboard'
+      }
+    } catch (error) {
+      setError('Kuthibitisha kumeshindikana')
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,20 +62,35 @@ export default function SignInPage() {
     setError('')
 
     try {
-      const result = await signIn('credentials', {
-        email,
-        password,
-        isSignUp: 'false',
-        redirect: false,
+      console.log('Submitting login form...', { email })
+      const response = await fetch('/api/auth/verify-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
       })
 
-      if (result?.error) {
-        setError('Barua pepe au nenosiri si sahihi')
-      } else {
-        router.push('/dashboard')
-        router.refresh()
+      console.log('Response status:', response.status)
+      
+      if (!response.ok) {
+        const data = await response.json()
+        console.log('Error response:', data)
+        if (response.status === 404) {
+          setError('Akaunti haipatikani. Jisajili kwanza.')
+        } else if (response.status === 401) {
+          setError('Barua pepe au nenosiri si sahihi')
+        } else {
+          setError(data.error || 'Kuna tatizo. Jaribu tena.')
+        }
+        return
       }
+
+      const data = await response.json()
+      console.log('Success response:', data)
+      
+      // Show OTP form instead of redirecting
+      setShowOtpForm(true)
     } catch (error) {
+      console.error('Login error:', error)
       setError('Kuna tatizo. Jaribu tena.')
     } finally {
       setIsLoading(false)
@@ -57,9 +111,11 @@ export default function SignInPage() {
 
         <Card className="shadow-lg bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl dyslexic-text">Ingia</CardTitle>
+            <CardTitle className="text-2xl dyslexic-text">
+              {showOtpForm ? 'Ingiza Msimbo' : 'Ingia'}
+            </CardTitle>
             <CardDescription className="dyslexic-text">
-              Ingia akaunti yako ili kuendelea kujifunza
+              {showOtpForm ? `Msimbo umetumwa kwa ${email}` : 'Ingia akaunti yako ili kuendelea kujifunza'}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -90,6 +146,7 @@ export default function SignInPage() {
               </div>
             </div>
 
+            {!showOtpForm ? (
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
                 <div className="bg-primary-50 border border-primary-200 rounded-lg p-3">
@@ -145,9 +202,51 @@ export default function SignInPage() {
                 className="w-full py-3 text-lg dyslexic-text"
                 disabled={isLoading}
               >
-                {isLoading ? 'Inapakia...' : 'Ingia'}
+                {isLoading ? 'Inathibitisha...' : 'Endelea'}
               </Button>
             </form>
+            ) : (
+            <form onSubmit={handleOtpSubmit} className="space-y-4">
+              {error && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-3">
+                  <p className="text-red-700 text-sm dyslexic-text">{error}</p>
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <label htmlFor="otp" className="text-sm font-medium text-gray-700 dyslexic-text">
+                  Msimbo wa OTP
+                </label>
+                <input
+                  id="otp"
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                  className="w-full px-4 py-3 text-center text-2xl tracking-widest border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent dyslexic-text"
+                  placeholder="123456"
+                  maxLength={6}
+                  required
+                />
+              </div>
+
+              <Button
+                type="submit"
+                className="w-full py-3 text-lg dyslexic-text"
+                disabled={isLoading || otp.length !== 6}
+              >
+                {isLoading ? 'Inathibitisha...' : 'Thibitisha'}
+              </Button>
+              
+              <Button
+                type="button"
+                variant="ghost"
+                onClick={() => setShowOtpForm(false)}
+                className="w-full text-sm dyslexic-text"
+              >
+                Rudi nyuma
+              </Button>
+            </form>
+            )}
 
             <div className="mt-6 text-center">
               <p className="text-gray-600 dyslexic-text">

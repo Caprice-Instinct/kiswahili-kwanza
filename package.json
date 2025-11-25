@@ -1,0 +1,13 @@
+{
+  "name": "kiswahili-kwanza-db-setup",
+  "version": "1.0.0",
+  "description": "Database population script for Kiswahili Kwanza",
+  "main": "populate-database.js",
+  "scripts": {
+    "populate": "node populate-database.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.0.0",
+    "bcryptjs": "^2.4.3"
+  }
+}

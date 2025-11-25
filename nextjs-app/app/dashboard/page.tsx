@@ -12,6 +12,7 @@ export default function Dashboard() {
   const { data: session } = useSession()
   const [progress, setProgress] = useState<any>(null)
   const [lessons, setLessons] = useState<any[]>([])
+  const [userStats, setUserStats] = useState<any>(null)
 
   useEffect(() => {
     if (session) {
@@ -22,6 +23,10 @@ export default function Dashboard() {
       fetch('/api/lessons')
         .then(res => res.json())
         .then(data => setLessons(data))
+        
+      fetch('/api/user/progress')
+        .then(res => res.json())
+        .then(data => setUserStats(data))
     }
   }, [session])
 
@@ -39,6 +44,34 @@ export default function Dashboard() {
           <p className="text-gray-600 dark:text-gray-300 dyslexic-text mt-2">
             Endelea na safari yako ya kujifunza Kiswahili
           </p>
+        </div>
+
+        {/* Progress Overview */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="text-2xl font-bold text-primary">{userStats?.stats?.totalLessonsCompleted || 0}</div>
+              <p className="text-sm text-gray-600 dyslexic-text">Masomo yamekamilika</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="text-2xl font-bold text-yellow-600">{Math.floor((userStats?.stats?.averageScore || 0) / 20)}</div>
+              <p className="text-sm text-gray-600 dyslexic-text">Nyota zilizopata</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="text-2xl font-bold text-green-600">{userStats?.wordsLearned || 25}</div>
+              <p className="text-sm text-gray-600 dyslexic-text">Maneno yamejifunza</p>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent className="p-4 text-center">
+              <div className="text-2xl font-bold text-orange-600">{userStats?.streak || 0}</div>
+              <p className="text-sm text-gray-600 dyslexic-text">Siku za mfululizo</p>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">

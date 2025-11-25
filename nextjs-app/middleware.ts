@@ -7,24 +7,24 @@ export default withAuth(
   {
     callbacks: {
       authorized: ({ token, req }) => {
-        // Protect these routes
-        const protectedPaths = ['/dashboard']
-        const isProtectedPath = protectedPaths.some(path => 
-          req.nextUrl.pathname.startsWith(path)
-        )
+        const pathname = req.nextUrl.pathname
         
-        // Allow access to auth pages without token
-        if (req.nextUrl.pathname.startsWith('/auth/')) {
+        // Public routes that don't require authentication
+        const publicPaths = [
+          '/',
+          '/auth/signin',
+          '/auth/signup', 
+          '/terms',
+          '/privacy'
+        ]
+        
+        // Allow access to public routes
+        if (publicPaths.includes(pathname)) {
           return true
         }
         
-        // For protected paths, require authentication
-        if (isProtectedPath) {
-          return !!token
-        }
-        
-        // Allow access to other pages
-        return true
+        // All other routes require authentication
+        return !!token
       },
     },
   }

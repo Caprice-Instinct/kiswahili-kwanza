@@ -1,0 +1,182 @@
+# MASOMO CONTENT - KISWAHILI KWANZA
+# Learning Categories for Children (6-9 years) with Dyslexia
+# Arranged by difficulty level with prerequisite system
+
+## CATEGORY 1: NAMBARI (NUMBERS) - LEVEL 1
+difficulty: 1
+prerequisite: none
+locked: false
+description: Basic numbers 1-10 with visual and audio support
+content:
+- moja (1) - one
+- mbili (2) - two  
+- tatu (3) - three
+- nne (4) - four
+- tano (5) - five
+- sita (6) - six
+- saba (7) - seven
+- nane (8) - eight
+- tisa (9) - nine
+- kumi (10) - ten
+
+reading_material:
+"Moja ni nambari ya kwanza. Mbili ni nambari ya pili. Tatu ni nambari ya tatu. Hesabu kutoka moja hadi kumi: moja, mbili, tatu, nne, tano, sita, saba, nane, tisa, kumi."
+
+quiz_unlock_threshold: 70%
+
+---
+
+## CATEGORY 2: RANGI (COLORS) - LEVEL 1  
+difficulty: 1
+prerequisite: none
+locked: false
+description: Basic colors with high contrast visual aids
+content:
+- nyekundu - red
+- nyeusi - black
+- nyeupe - white
+- kijani - green
+- buluu - blue
+- njano - yellow
+- kahawia - brown
+- waridi - pink
+
+reading_material:
+"Rangi ni jambo zuri. Nyekundu ni rangi ya damu. Kijani ni rangi ya majani. Buluu ni rangi ya anga. Njano ni rangi ya jua. Nyeupe ni rangi ya mchanga."
+
+quiz_unlock_threshold: 70%
+
+---
+
+## CATEGORY 3: FAMILIA NDOGO (NUCLEAR FAMILY) - LEVEL 2
+difficulty: 2
+prerequisite: nambari,rangi
+locked: true
+description: Immediate family members with simple relationships
+content:
+- mama - mother
+- baba - father
+- mtoto - child
+- mwana - son/daughter
+- kaka - brother
+- dada - sister
+- bibi - grandmother
+- babu - grandfather
+
+reading_material:
+"Familia yangu ni ndogo. Nina mama na baba. Nina kaka mmoja na dada mmoja. Bibi na babu wanatutembelea. Tunapendana sana familia yetu."
+
+quiz_unlock_threshold: 75%
+
+---
+
+## CATEGORY 4: SIKU ZA WIKI (DAYS OF THE WEEK) - LEVEL 2
+difficulty: 2  
+prerequisite: nambari,rangi
+locked: true
+description: Seven days with routine activities
+content:
+- Jumapili - Sunday
+- Jumatatu - Monday
+- Jumanne - Tuesday
+- Jumatano - Wednesday
+- Alhamisi - Thursday
+- Ijumaa - Friday
+- Jumamosi - Saturday
+
+reading_material:
+"Wiki ina siku saba. Jumapili ni siku ya kwanza ya wiki. Jumatatu ni siku ya shule. Jumanne pia ni siku ya shule. Jumamosi ni siku ya mchezo. Siku zote ni muhimu."
+
+quiz_unlock_threshold: 75%
+
+---
+
+## CATEGORY 5: MATUNDA (FRUITS) - LEVEL 3
+difficulty: 3
+prerequisite: familia_ndogo,siku_za_wiki
+locked: true
+description: Common fruits with nutritional benefits
+content:
+- ndizi - banana
+- chungwa - orange
+- tufaha - apple
+- nanasi - pineapple
+- embe - mango
+- papai - papaya
+- tikiti maji - watermelon
+- zabibu - grapes
+- machungwa - oranges (plural)
+- miembe - mangoes (plural)
+
+reading_material:
+"Matunda ni chakula kizuri. Ndizi ni tamu na ni nzuri kwa afya. Chungwa lina vitamini nyingi. Embe ni tunda langu la kupenda. Tunapaswa kula matunda kila siku ili tuwe na afya njema."
+
+quiz_unlock_threshold: 80%
+
+---
+
+## CATEGORY 6: FAMILIA KUBWA (EXTENDED FAMILY) - LEVEL 4
+difficulty: 4
+prerequisite: familia_ndogo,matunda
+locked: true
+description: Extended family relationships and connections
+content:
+- shangazi - aunt (father's sister)
+- mjomba - uncle (mother's brother)
+- binamu - cousin
+- nyawira - daughter-in-law
+- mkwe - son-in-law
+- mpwa - nephew/niece
+- kambo - step-parent
+- mama mkubwa - elder aunt
+- baba mdogo - younger uncle
+
+reading_material:
+"Familia kubwa ina watu wengi. Shangazi ni dada wa baba. Mjomba ni kaka wa mama. Binamu ni mtoto wa shangazi au mjomba. Familia kubwa hukutana wakati wa sherehe. Wote ni muhimu katika maisha yetu."
+
+quiz_unlock_threshold: 80%
+
+---
+
+## CATEGORY 7: MIEZI YA MWAKA (MONTHS OF THE YEAR) - LEVEL 5
+difficulty: 5
+prerequisite: siku_za_wiki,familia_kubwa
+locked: true
+description: Twelve months with seasonal activities
+content:
+- Januari - January
+- Februari - February  
+- Machi - March
+- Aprili - April
+- Mei - May
+- Juni - June
+- Julai - July
+- Agosti - August
+- Septemba - September
+- Oktoba - October
+- Novemba - November
+- Desemba - December
+
+reading_material:
+"Mwaka una miezi kumi na miwili. Januari ni mwezi wa kwanza wa mwaka. Desemba ni mwezi wa mwisho. Kila mwezi una siku thelathini au thelathini na moja. Baadhi ya miezi ina mvua, mengine yana jua kali. Miezi yote ni muhimu kwa mazao na maisha yetu."
+
+quiz_unlock_threshold: 85%
+
+---
+
+# LEARNING PROGRESSION RULES
+# - Categories 1-2 (Numbers, Colors): Available immediately
+# - Category 3-4 (Nuclear Family, Days): Unlock after completing any 2 from level 1
+# - Category 5 (Fruits): Unlock after completing Nuclear Family AND Days
+# - Category 6 (Extended Family): Unlock after completing Nuclear Family AND Fruits  
+# - Category 7 (Months): Unlock after completing Days AND Extended Family
+
+# DYSLEXIA-FRIENDLY FEATURES
+# - Large, clear fonts
+# - High contrast colors
+# - Audio pronunciation for all words
+# - Visual memory aids
+# - Repetitive patterns
+# - Short, simple sentences
+# - Consistent vocabulary building
+# - Multi-sensory learning approach

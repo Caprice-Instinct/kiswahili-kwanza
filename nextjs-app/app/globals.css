@@ -200,4 +200,36 @@
       transform: translateY(0);
     }
   }
+  
+  /* Story highlight styles */
+  .highlight {
+    background-color: rgb(59 130 246 / 0.2);
+    color: rgb(29 78 216);
+    padding: 2px 4px;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    font-weight: 600;
+  }
+  
+  .highlight:hover::after {
+    content: attr(data-english);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(31 41 55);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 4px;
+  }
+  
+  .dark .highlight {
+    background-color: rgb(59 130 246 / 0.3);
+    color: rgb(147 197 253);
+  }
 }

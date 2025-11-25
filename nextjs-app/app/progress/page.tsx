@@ -35,10 +35,10 @@ export default function ProgressPage() {
     }
   }, [session])
 
-  const completedLessons = progress?.progress?.filter((p: any) => p.completed).length || 0
-  const totalStars = progress?.progress?.reduce((sum: number, p: any) => sum + (p.stars || 0), 0) || 0
-  const totalWords = completedLessons * 5 // Estimate 5 words per lesson
-  const streakDays = session?.user?.streak || 0
+  const completedLessons = progress?.user?.stats?.totalLessonsCompleted || progress?.progress?.filter((p: any) => p.completed).length || 0
+  const totalStars = Math.floor((progress?.user?.stats?.averageScore || 0) / 20) || progress?.progress?.reduce((sum: number, p: any) => sum + (p.stars || 0), 0) || 0
+  const totalWords = completedLessons * 3 || 0
+  const streakDays = progress?.user?.streak || 0
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800">
@@ -156,14 +156,14 @@ export default function ProgressPage() {
                 <div className="w-20 h-20 bg-gradient-to-br from-sky-500 to-violet-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 dyslexic-text">Kiwango {session?.user?.level || 1}</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 dyslexic-text">Kiwango {progress?.user?.level || 1}</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 dyslexic-text">Kiwango chako</p>
                 <div className="mb-4">
                   <Progress value={completedLessons * 10} className="mb-2" />
-                  <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">{completedLessons * 10}% hadi Kiwango {(session?.user?.level || 1) + 1}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">{completedLessons * 10}% hadi Kiwango {(progress?.user?.level || 1) + 1}</p>
                 </div>
                 <Badge variant="secondary" className="dyslexic-text">
-                  {session?.user?.points || 0} alama
+                  {progress?.user?.points || 0} alama
                 </Badge>
               </CardContent>
             </Card>
