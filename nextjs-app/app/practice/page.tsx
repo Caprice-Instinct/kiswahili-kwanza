@@ -115,6 +115,13 @@ export default function PracticePage() {
               Chagua moja ya makundi hapa chini ili kujaribu majaribio ya
               Kiswahili yaliyotayarishwa kwa ajili yako.
             </p>
+            <div className="mt-8 flex justify-center">
+              <a href="/quiz/generate">
+                <Button className="text-lg px-8 py-4 dyslexic-text" size="lg">
+                  Tengeneza Jaribio Lako Mwenyewe
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>

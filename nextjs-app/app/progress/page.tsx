@@ -1,44 +1,71 @@
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { useSession } from 'next-auth/react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { ProgressRoadmap } from "@/components/progress-roadmap"
-import { 
-  Trophy, 
-  Star, 
-  Target, 
-  Calendar, 
-  BookOpen, 
+import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
+import { ProgressRoadmap } from "@/components/progress-roadmap";
+import {
+  Trophy,
+  Star,
+  Target,
+  Calendar,
+  BookOpen,
   GamepadIcon,
   TrendingUp,
   Award,
   Clock,
   Zap,
   Heart,
-  Volume2
-} from "lucide-react"
+  Volume2,
+} from "lucide-react";
 
 export default function ProgressPage() {
-  const { data: session } = useSession()
-  const [progress, setProgress] = useState<any>(null)
-  const [stats, setStats] = useState<any>(null)
+  const { data: session } = useSession();
+  const [progress, setProgress] = useState<any>(null);
+  const [stats, setStats] = useState<any>(null);
 
   useEffect(() => {
     if (session) {
-      fetch('/api/progress')
-        .then(res => res.json())
-        .then(data => setProgress(data))
+      // Fetch both reading and quiz progress
+      Promise.all([
+        fetch("/api/progress").then((res) => res.json()),
+        fetch("/api/quiz/progress").then((res) => res.json()),
+      ]).then(([reading, quiz]) => {
+        setProgress({ ...reading, quiz });
+      });
     }
-  }, [session])
+  }, [session]);
 
-  const completedLessons = progress?.user?.stats?.totalLessonsCompleted || progress?.progress?.filter((p: any) => p.completed).length || 0
-  const totalStars = Math.floor((progress?.user?.stats?.averageScore || 0) / 20) || progress?.progress?.reduce((sum: number, p: any) => sum + (p.stars || 0), 0) || 0
-  const totalWords = completedLessons * 3 || 0
-  const streakDays = progress?.user?.streak || 0
+  const completedLessons =
+    progress?.user?.stats?.totalLessonsCompleted ||
+    progress?.progress?.filter((p: any) => p.completed).length ||
+    0;
+  const totalStars =
+    Math.floor((progress?.user?.stats?.averageScore || 0) / 20) ||
+    progress?.progress?.reduce(
+      (sum: number, p: any) => sum + (p.stars || 0),
+      0
+    ) ||
+    0;
+  const totalWords = completedLessons * 3 || 0;
+  const streakDays = progress?.user?.streak || 0;
+
+  // Helper for date formatting
+  const formatDate = (date: string) =>
+    new Date(date).toLocaleDateString("sw-KE", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 dark:from-gray-900 dark:to-gray-800">
@@ -46,7 +73,9 @@ export default function ProgressPage() {
       <section className="bg-white border-b border-gray-200 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4 dyslexic-text">Maendeleo Yangu</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4 dyslexic-text">
+              Maendeleo Yangu
+            </h1>
             <p className="text-lg text-gray-600 dyslexic-text max-w-2xl mx-auto">
               Ona jinsi unavyoendelea kujifunza Kiswahili
             </p>
@@ -62,43 +91,168 @@ export default function ProgressPage() {
               <div className="w-12 h-12 bg-sky-200 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <BookOpen className="w-6 h-6 text-sky-700 dark:text-sky-300" />
               </div>
-              <div className="text-3xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text">{completedLessons}</div>
-              <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">Masomo yamekamilika</p>
+              <div className="text-3xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text">
+                {completedLessons}
+              </div>
+              <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">
+                Masomo yamekamilika
+              </p>
             </CardContent>
           </Card>
-          
+
           <Card className="text-center bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/20 border-violet-200/50 dark:border-violet-700/30">
             <CardContent className="pt-6">
               <div className="w-12 h-12 bg-violet-200 dark:bg-violet-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <GamepadIcon className="w-6 h-6 text-violet-700 dark:text-violet-300" />
               </div>
-              <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text">{totalStars}</div>
-              <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">Nyota zilizopata</p>
+              <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text">
+                {totalStars}
+              </div>
+              <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">
+                Nyota zilizopata
+              </p>
             </CardContent>
           </Card>
-          
+
           <Card className="text-center bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 border-pink-200/50 dark:border-pink-700/30">
             <CardContent className="pt-6">
               <div className="w-12 h-12 bg-pink-200 dark:bg-pink-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Clock className="w-6 h-6 text-pink-700 dark:text-pink-300" />
               </div>
-              <div className="text-3xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text">{totalWords}</div>
-              <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">Maneno yamejifunza</p>
+              <div className="text-3xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text">
+                {totalWords}
+              </div>
+              <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">
+                Maneno yamejifunza
+              </p>
             </CardContent>
           </Card>
-          
+
           <Card className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/20 border-indigo-200/50 dark:border-indigo-700/30">
             <CardContent className="pt-6">
               <div className="w-12 h-12 bg-indigo-200 dark:bg-indigo-800 rounded-full flex items-center justify-center mx-auto mb-3">
                 <Zap className="w-6 h-6 text-indigo-700 dark:text-indigo-300" />
               </div>
-              <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 dyslexic-text">{streakDays}</div>
-              <p className="text-sm text-indigo-600 dark:text-indigo-400 dyslexic-text">Siku za mfululizo</p>
+              <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 dyslexic-text">
+                {streakDays}
+              </div>
+              <p className="text-sm text-indigo-600 dark:text-indigo-400 dyslexic-text">
+                Siku za mfululizo
+              </p>
             </CardContent>
           </Card>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
+          {/* Quiz Progress Table */}
+          <div className="lg:col-span-3 mb-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="dyslexic-text">
+                  Jaribio Zote Ulizofanya
+                </CardTitle>
+                <CardDescription className="dyslexic-text">
+                  Orodha ya majaribio yote na alama zako
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {progress?.quiz?.attempts?.length ? (
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm">
+                      <thead>
+                        <tr className="bg-gray-100">
+                          <th className="p-2 text-left">Jaribio</th>
+                          <th className="p-2 text-left">Alama</th>
+                          <th className="p-2 text-left">Asilimia</th>
+                          <th className="p-2 text-left">Tarehe</th>
+                          <th className="p-2 text-left">Hali</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {progress.quiz.attempts.map((a: any, i: number) => (
+                          <tr key={a._id || i} className="border-b">
+                            <td className="p-2">{a.quizId}</td>
+                            <td className="p-2">
+                              {a.score} / {a.totalPoints}
+                            </td>
+                            <td className="p-2">{a.percentage}%</td>
+                            <td className="p-2">{formatDate(a.completedAt)}</td>
+                            <td className="p-2">
+                              {a.percentage >= 70 ? (
+                                <span className="text-green-700 font-bold">
+                                  Umepita
+                                </span>
+                              ) : (
+                                <span className="text-red-700 font-bold">
+                                  Hujapita
+                                </span>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="text-gray-500 text-center">
+                    Bado hujafanya jaribio lolote.
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Reading Materials Table */}
+          <div className="lg:col-span-3 mb-8">
+            <Card>
+              <CardHeader>
+                <CardTitle className="dyslexic-text">
+                  Masomo Uliyokamilisha
+                </CardTitle>
+                <CardDescription className="dyslexic-text">
+                  Orodha ya masomo au nyenzo za kusoma ulizokamilisha
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                {progress?.progress?.length ? (
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full text-sm">
+                      <thead>
+                        <tr className="bg-gray-100">
+                          <th className="p-2 text-left">Somo</th>
+                          <th className="p-2 text-left">Tarehe</th>
+                          <th className="p-2 text-left">Hali</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {progress.progress
+                          .filter((l: any) => l.completed)
+                          .map((l: any, i: number) => (
+                            <tr key={l._id || i} className="border-b">
+                              <td className="p-2">
+                                {l.lessonId || l.title || l._id}
+                              </td>
+                              <td className="p-2">
+                                {l.completedAt
+                                  ? formatDate(l.completedAt)
+                                  : "-"}
+                              </td>
+                              <td className="p-2 text-green-700 font-bold">
+                                Imekamilika
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="text-gray-500 text-center">
+                    Bado hujakamilisha somo lolote.
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
           {/* Left Column */}
           <div className="lg:col-span-2 space-y-8">
             {/* Progress Roadmap */}
@@ -156,11 +310,18 @@ export default function ProgressPage() {
                 <div className="w-20 h-20 bg-gradient-to-br from-sky-500 to-violet-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Trophy className="w-10 h-10 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 dyslexic-text">Kiwango {progress?.user?.level || 1}</h3>
-                <p className="text-gray-600 dark:text-gray-400 mb-4 dyslexic-text">Kiwango chako</p>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 dyslexic-text">
+                  Kiwango {progress?.user?.level || 1}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-400 mb-4 dyslexic-text">
+                  Kiwango chako
+                </p>
                 <div className="mb-4">
                   <Progress value={completedLessons * 10} className="mb-2" />
-                  <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">{completedLessons * 10}% hadi Kiwango {(progress?.user?.level || 1) + 1}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 dyslexic-text">
+                    {completedLessons * 10}% hadi Kiwango{" "}
+                    {(progress?.user?.level || 1) + 1}
+                  </p>
                 </div>
                 <Badge variant="secondary" className="dyslexic-text">
                   {progress?.user?.points || 0} alama
@@ -208,5 +369,5 @@ export default function ProgressPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

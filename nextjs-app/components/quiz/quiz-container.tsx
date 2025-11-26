@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { Quiz, QuizAttempt } from '@/types/quiz';
-import { QuizQuestion } from './quiz-question';
-import { QuizResults } from './quiz-results';
-import { Progress } from '@/components/ui/progress';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Play, RotateCcw } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { Quiz, QuizAttempt } from "@/types/quiz";
+import { QuizQuestion } from "./quiz-question";
+import { QuizResults } from "./quiz-results";
+import { Progress } from "@/components/ui/progress";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Play, RotateCcw } from "lucide-react";
 
 interface QuizContainerProps {
   quiz: Quiz;
@@ -15,7 +15,11 @@ interface QuizContainerProps {
   allowRetry?: boolean;
 }
 
-export function QuizContainer({ quiz, onComplete, allowRetry = true }: QuizContainerProps) {
+export function QuizContainer({
+  quiz,
+  onComplete,
+  allowRetry = true,
+}: QuizContainerProps) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isStarted, setIsStarted] = useState(false);
@@ -46,15 +50,15 @@ export function QuizContainer({ quiz, onComplete, allowRetry = true }: QuizConta
   };
 
   const handleAnswerSelect = (answer: string | string[]) => {
-    setAnswers(prev => ({
+    setAnswers((prev) => ({
       ...prev,
-      [currentQuestion.id]: answer
+      [currentQuestion.id]: answer,
     }));
   };
 
   const handleNext = () => {
     if (currentQuestionIndex < quiz.questions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
+      setCurrentQuestionIndex((prev) => prev + 1);
     } else {
       handleComplete();
     }
@@ -62,21 +66,24 @@ export function QuizContainer({ quiz, onComplete, allowRetry = true }: QuizConta
 
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(prev => prev - 1);
+      setCurrentQuestionIndex((prev) => prev - 1);
     }
   };
 
-  const handleComplete = () => {
+  const handleComplete = async () => {
     const endTime = new Date();
-    const timeSpent = startTime ? Math.floor((endTime.getTime() - startTime.getTime()) / 1000) : 0;
-    
+    const timeSpent = startTime
+      ? Math.floor((endTime.getTime() - startTime.getTime()) / 1000)
+      : 0;
     let score = 0;
-    quiz.questions.forEach(question => {
+    quiz.questions.forEach((question) => {
       const userAnswer = answers[question.id];
       if (Array.isArray(question.correctAnswer)) {
-        if (Array.isArray(userAnswer) && 
-            userAnswer.length === question.correctAnswer.length &&
-            userAnswer.every(ans => question.correctAnswer.includes(ans))) {
+        if (
+          Array.isArray(userAnswer) &&
+          userAnswer.length === question.correctAnswer.length &&
+          userAnswer.every((ans) => question.correctAnswer.includes(ans))
+        ) {
           score += question.points;
         }
       } else {
@@ -89,7 +96,7 @@ export function QuizContainer({ quiz, onComplete, allowRetry = true }: QuizConta
     const attempt: QuizAttempt = {
       id: `attempt_${Date.now()}`,
       quizId: quiz.id,
-      userId: 'current_user', // Replace with actual user ID
+      userId: "current_user", // Replace with actual user ID
       answers,
       score,
       totalPoints: quiz.totalPoints,
@@ -97,8 +104,27 @@ export function QuizContainer({ quiz, onComplete, allowRetry = true }: QuizConta
       timeSpent,
       completed: true,
       startedAt: startTime!,
-      completedAt: endTime
+      completedAt: endTime,
     };
+
+    // Save progress to backend
+    try {
+      await fetch("/api/quiz/progress", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          quizId: quiz.id,
+          score,
+          totalPoints: quiz.totalPoints,
+          percentage: Math.round((score / quiz.totalPoints) * 100),
+          answers,
+          completedAt: endTime,
+        }),
+      });
+    } catch (err) {
+      // Optionally handle error
+      console.error("Failed to save quiz progress", err);
+    }
 
     setIsCompleted(true);
     onComplete?.(attempt);
@@ -150,8 +176,8 @@ export function QuizContainer({ quiz, onComplete, allowRetry = true }: QuizConta
 
   if (isCompleted) {
     return (
-      <QuizResults 
-        quiz={quiz} 
+      <QuizResults
+        quiz={quiz}
         answers={answers}
         onRetry={allowRetry ? handleRetry : undefined}
       />

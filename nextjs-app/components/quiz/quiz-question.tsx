@@ -17,6 +17,7 @@ interface QuizQuestionProps {
   onPrevious?: () => void;
   showHints?: boolean;
   timeRemaining?: number;
+  showAnswerFeedback?: boolean;
 }
 
 export function QuizQuestion({
@@ -29,6 +30,7 @@ export function QuizQuestion({
   onPrevious,
   showHints = false,
   timeRemaining,
+  showAnswerFeedback = true,
 }: QuizQuestionProps) {
   const [showHint, setShowHint] = useState(false);
 
@@ -44,27 +46,49 @@ export function QuizQuestion({
       case "multiple-choice":
         return (
           <div className="space-y-3">
-            {question.options?.map((option) => (
-              <Button
-                key={option.id}
-                variant={selectedAnswer === option.id ? "default" : "outline"}
-                className="w-full justify-start text-left h-auto p-4"
-                onClick={() => onAnswerSelect(option.id)}
-              >
-                <div className="flex items-center gap-3">
-                  <span>{option.text}</span>
-                  {option.audioUrl && (
-                    <Volume2
-                      className="w-4 h-4 cursor-pointer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playAudio(option.audioUrl);
-                      }}
-                    />
-                  )}
-                </div>
-              </Button>
-            ))}
+            {question.options?.map((option) => {
+              let color = "outline";
+              if (showAnswerFeedback && selectedAnswer) {
+                if (option.id === selectedAnswer && !option.isCorrect) {
+                  color = "destructive"; // red for wrong selected
+                }
+                if (option.isCorrect) {
+                  color = "success"; // green for correct
+                }
+              } else if (selectedAnswer === option.id) {
+                color = "default";
+              }
+              return (
+                <Button
+                  key={option.id}
+                  variant={color as any}
+                  className={`w-full justify-start text-left h-auto p-4 ${
+                    color === "success"
+                      ? "bg-green-100 border-green-500 text-green-900"
+                      : ""
+                  } ${
+                    color === "destructive"
+                      ? "bg-red-100 border-red-500 text-red-900"
+                      : ""
+                  }`}
+                  onClick={() => onAnswerSelect(option.id)}
+                  disabled={!!selectedAnswer}
+                >
+                  <div className="flex items-center gap-3">
+                    <span>{option.text}</span>
+                    {option.audioUrl && (
+                      <Volume2
+                        className="w-4 h-4 cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playAudio(option.audioUrl);
+                        }}
+                      />
+                    )}
+                  </div>
+                </Button>
+              );
+            })}
           </div>
         );
 
@@ -81,25 +105,56 @@ export function QuizQuestion({
           </div>
         );
 
-      case "true-false":
+      case "true-false": {
+        let trueColor = "outline";
+        let falseColor = "outline";
+        if (showAnswerFeedback && selectedAnswer) {
+          const correct = question.correctAnswer === "true";
+          if (selectedAnswer === "true" && correct) trueColor = "success";
+          if (selectedAnswer === "false" && !correct) falseColor = "success";
+          if (selectedAnswer === "true" && !correct) trueColor = "destructive";
+          if (selectedAnswer === "false" && correct) falseColor = "destructive";
+        } else {
+          if (selectedAnswer === "true") trueColor = "default";
+          if (selectedAnswer === "false") falseColor = "default";
+        }
         return (
           <div className="flex gap-4">
             <Button
-              variant={selectedAnswer === "true" ? "default" : "outline"}
-              className="flex-1"
+              variant={trueColor as any}
+              className={`flex-1 ${
+                trueColor === "success"
+                  ? "bg-green-100 border-green-500 text-green-900"
+                  : ""
+              } ${
+                trueColor === "destructive"
+                  ? "bg-red-100 border-red-500 text-red-900"
+                  : ""
+              }`}
               onClick={() => onAnswerSelect("true")}
+              disabled={!!selectedAnswer}
             >
               Kweli (True)
             </Button>
             <Button
-              variant={selectedAnswer === "false" ? "default" : "outline"}
-              className="flex-1"
+              variant={falseColor as any}
+              className={`flex-1 ${
+                falseColor === "success"
+                  ? "bg-green-100 border-green-500 text-green-900"
+                  : ""
+              } ${
+                falseColor === "destructive"
+                  ? "bg-red-100 border-red-500 text-red-900"
+                  : ""
+              }`}
               onClick={() => onAnswerSelect("false")}
+              disabled={!!selectedAnswer}
             >
               Si kweli (False)
             </Button>
           </div>
         );
+      }
 
       default:
         return <div>Question type not implemented</div>;
