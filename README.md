@@ -35,17 +35,19 @@ kiswahili-kwanza/
 ## Features
 
 ### Current Features
- - ✅ Interactive home page with platform overview
- - ✅ Structured lessons page with learning paths
- - ✅ Practice exercises with quizzes
- - ✅ About page with platform information
- - ✅ Responsive design for all devices
- - ✅ Clean, modern UI with Tailwind CSS
- - ✅ Progress tracking: Learners and guardians can view quiz attempts, scores, and progress in real time
- - ✅ Parent Portal: Guardians can securely access a dashboard showing their learner’s quiz history, categories (in Kiswahili), difficulty, and pass/fail status
- - ✅ Swahili localization for quiz categories and difficulty levels
+
+- ✅ Interactive home page with platform overview
+- ✅ Structured lessons page with learning paths
+- ✅ Practice exercises with quizzes
+- ✅ About page with platform information
+- ✅ Responsive design for all devices
+- ✅ Clean, modern UI with Tailwind CSS
+- ✅ Progress tracking: Learners and guardians can view quiz attempts, scores, and progress in real time
+- ✅ Parent Portal: Guardians can securely access a dashboard showing their learner’s quiz history, categories (in Kiswahili), difficulty, and pass/fail status
+- ✅ Swahili localization for quiz categories and difficulty levels
 
 ### Planned Features
+
 - 🔄 User authentication and profiles
 - 🔄 Progress tracking and analytics
 - 🔄 AI-powered translation
@@ -60,12 +62,15 @@ kiswahili-kwanza/
 ## Getting Started
 
 ### Database Setup (for development/testing)
+
 The app uses MongoDB to store quiz attempts and learner progress. To seed the database with mock data for testing:
+
 1. Connect to your MongoDB instance.
 2. Run the provided script in the `README.md` or `DATABASE_SETUP.md` to insert sample quiz attempts for test users.
 3. Ensure your `.env` file is configured with the correct MongoDB connection string.
 
 ### Prerequisites
+
 - Node.js 18.x or higher
 - Python 3.9+ (for AI model)
 - npm or yarn
@@ -73,16 +78,19 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 ### Running the Next.js App
 
 1. Navigate to the Next.js app directory:
+
    ```bash
    cd nextjs-app
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Run the development server:
+
    ```bash
    npm run dev
    ```
@@ -92,25 +100,30 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 ### Running the AI Model API
 
 1. Navigate to the AI model directory:
+
    ```bash
    cd ai-model
    ```
 
 2. Create a virtual environment:
+
    ```bash
    python -m venv venv
    ```
 
 3. Activate the virtual environment:
+
    - Windows: `venv\Scripts\activate`
    - Unix/MacOS: `source venv/bin/activate`
 
 4. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 5. Run the API server:
+
    ```bash
    python api/app.py
    ```
@@ -120,13 +133,15 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 ## Technology Stack
 
 ### Frontend (Next.js App)
+
 - **Framework**: Next.js 15
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **UI Library**: React 18
- - **Database**: MongoDB (for quiz attempts, progress, and user data)
+- **Database**: MongoDB (for quiz attempts, progress, and user data)
 
 ### Backend (AI Model)
+
 - **Framework**: FastAPI
 - **ML Libraries**: PyTorch, Transformers
 - **NLP**: NLTK, spaCy
@@ -135,6 +150,7 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 ## Development Roadmap
 
 ### Phase 1: Foundation (Current)
+
 - [x] Set up project structure
 - [x] Create basic Next.js application
 - [x] Design UI/UX for main pages
@@ -142,6 +158,7 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 - [ ] Install dependencies
 
 ### Phase 2: Core Features
+
 - [ ] Implement user authentication
 - [ ] Create lesson content database
 - [ ] Develop practice exercise system
@@ -149,6 +166,7 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 - [ ] Add progress tracking
 
 ### Phase 3: AI Integration
+
 - [ ] Train translation model
 - [ ] Implement pronunciation assessment
 - [ ] Build recommendation system
@@ -156,6 +174,7 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 - [ ] Deploy AI models
 
 ### Phase 4: Enhancement
+
 - [ ] Add audio pronunciation guides
 - [ ] Implement flashcard system
 - [ ] Create community features
@@ -163,6 +182,7 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 - [ ] Mobile app (React Native)
 
 ### Phase 5: Launch
+
 - [ ] Beta testing
 - [ ] User feedback integration
 - [ ] Performance optimization
@@ -170,7 +190,9 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 - [ ] Marketing and outreach
 
 ## Why Learn Kiswahili?
+
 ## Recent Improvements
+
 - Unified progress table for both learners and guardians, showing all quiz attempts with Swahili categories and difficulty
 - Improved error handling and build stability for Next.js 15
 - Parent portal PIN security and settings management
@@ -185,6 +207,7 @@ The app uses MongoDB to store quiz attempts and learner progress. To seed the da
 ## Contributing
 
 We welcome contributions! Please feel free to:
+
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
@@ -197,11 +220,13 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Resources
 
 ### Kiswahili Learning Resources
+
 - [Kamusi Project](http://kamusi.org/) - Comprehensive Kiswahili dictionary
 - [UKWELI Corpus](http://www.helsinki.fi/varieng/CoRD/corpora/UKWELI/) - Kiswahili text corpus
 - [Global Voices Swahili](https://sw.globalvoices.org/) - News and stories in Kiswahili
 
 ### Development Resources
+
 - [Next.js Documentation](https://nextjs.org/docs)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [FastAPI Documentation](https://fastapi.tiangolo.com/)
@@ -210,6 +235,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Contact
 
 For questions, suggestions, or support:
+
 - Open an issue on GitHub
 - Contact the development team
 
