@@ -35,12 +35,15 @@ kiswahili-kwanza/
 ## Features
 
 ### Current Features
-- ✅ Interactive home page with platform overview
-- ✅ Structured lessons page with learning paths
-- ✅ Practice exercises with quizzes
-- ✅ About page with platform information
-- ✅ Responsive design for all devices
-- ✅ Clean, modern UI with Tailwind CSS
+ - ✅ Interactive home page with platform overview
+ - ✅ Structured lessons page with learning paths
+ - ✅ Practice exercises with quizzes
+ - ✅ About page with platform information
+ - ✅ Responsive design for all devices
+ - ✅ Clean, modern UI with Tailwind CSS
+ - ✅ Progress tracking: Learners and guardians can view quiz attempts, scores, and progress in real time
+ - ✅ Parent Portal: Guardians can securely access a dashboard showing their learner’s quiz history, categories (in Kiswahili), difficulty, and pass/fail status
+ - ✅ Swahili localization for quiz categories and difficulty levels
 
 ### Planned Features
 - 🔄 User authentication and profiles
@@ -55,6 +58,12 @@ kiswahili-kwanza/
 - 🔄 Offline mode
 
 ## Getting Started
+
+### Database Setup (for development/testing)
+The app uses MongoDB to store quiz attempts and learner progress. To seed the database with mock data for testing:
+1. Connect to your MongoDB instance.
+2. Run the provided script in the `README.md` or `DATABASE_SETUP.md` to insert sample quiz attempts for test users.
+3. Ensure your `.env` file is configured with the correct MongoDB connection string.
 
 ### Prerequisites
 - Node.js 18.x or higher
@@ -115,6 +124,7 @@ kiswahili-kwanza/
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **UI Library**: React 18
+ - **Database**: MongoDB (for quiz attempts, progress, and user data)
 
 ### Backend (AI Model)
 - **Framework**: FastAPI
@@ -160,6 +170,10 @@ kiswahili-kwanza/
 - [ ] Marketing and outreach
 
 ## Why Learn Kiswahili?
+## Recent Improvements
+- Unified progress table for both learners and guardians, showing all quiz attempts with Swahili categories and difficulty
+- Improved error handling and build stability for Next.js 15
+- Parent portal PIN security and settings management
 
 - **Widely Spoken**: Over 100 million speakers across East and Central Africa
 - **Official Language**: Tanzania, Kenya, Uganda, and the African Union
