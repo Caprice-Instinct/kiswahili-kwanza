@@ -24,6 +24,9 @@ export function QuizContainer({
   const [answers, setAnswers] = useState<Record<string, string | string[]>>({});
   const [isStarted, setIsStarted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [completedAttempt, setCompletedAttempt] = useState<QuizAttempt | null>(
+    null
+  );
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [timeRemaining, setTimeRemaining] = useState<number | undefined>();
 
@@ -76,20 +79,34 @@ export function QuizContainer({
       ? Math.floor((endTime.getTime() - startTime.getTime()) / 1000)
       : 0;
     let score = 0;
+    const mistakes: Array<{
+      questionId: string;
+      question: string;
+      userAnswer: string | string[] | undefined;
+      correctAnswer: string | string[];
+      explanation?: string;
+    }> = [];
     quiz.questions.forEach((question) => {
       const userAnswer = answers[question.id];
+      let isCorrect = false;
       if (Array.isArray(question.correctAnswer)) {
-        if (
+        isCorrect =
           Array.isArray(userAnswer) &&
           userAnswer.length === question.correctAnswer.length &&
-          userAnswer.every((ans) => question.correctAnswer.includes(ans))
-        ) {
-          score += question.points;
-        }
+          userAnswer.every((ans) => question.correctAnswer.includes(ans));
       } else {
-        if (userAnswer === question.correctAnswer) {
-          score += question.points;
-        }
+        isCorrect = userAnswer === question.correctAnswer;
+      }
+      if (isCorrect) {
+        score += question.points;
+      } else {
+        mistakes.push({
+          questionId: question.id,
+          question: question.question,
+          userAnswer,
+          correctAnswer: question.correctAnswer,
+          explanation: question.explanation,
+        });
       }
     });
 
@@ -105,6 +122,7 @@ export function QuizContainer({
       completed: true,
       startedAt: startTime!,
       completedAt: endTime,
+      mistakes,
     };
 
     // Save progress to backend
@@ -119,6 +137,9 @@ export function QuizContainer({
           percentage: Math.round((score / quiz.totalPoints) * 100),
           answers,
           completedAt: endTime,
+          mistakes,
+          category: quiz.category || quiz.title || "",
+          difficulty: quiz.difficulty || "",
         }),
       });
     } catch (err) {
@@ -126,8 +147,14 @@ export function QuizContainer({
       console.error("Failed to save quiz progress", err);
     }
 
-    setIsCompleted(true);
-    onComplete?.(attempt);
+    // Redirect to results page with only quizId
+    window.location.href = `/quiz/results?quizId=${encodeURIComponent(
+      quiz.id
+    )}`;
+    // If you want to keep the old state-based results, uncomment below:
+    // setCompletedAttempt(attempt);
+    // setIsCompleted(true);
+    // onComplete?.(attempt);
   };
 
   const handleRetry = () => {
@@ -174,14 +201,9 @@ export function QuizContainer({
     );
   }
 
-  if (isCompleted) {
-    return (
-      <QuizResults
-        quiz={quiz}
-        answers={answers}
-        onRetry={allowRetry ? handleRetry : undefined}
-      />
-    );
+  if (isCompleted && completedAttempt) {
+    // This block is now unused since we redirect to a dedicated results page
+    return null;
   }
 
   return (

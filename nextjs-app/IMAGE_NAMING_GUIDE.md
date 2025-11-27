@@ -16,7 +16,7 @@ public/images/
 Use exactly these filenames (case-sensitive):
 
 ### Numbers (public/images/numbers/)
-- `0.jpg` or `0.png` - for "sifuri" (zero)
+- `0.jpg` or `0.png` - for "sufuri" (zero)
 - `1.jpg` or `1.png` - for "moja" (one)
 - `2.jpg` or `2.png` - for "mbili" (two)
 - `3.jpg` or `3.png` - for "tatu" (three)

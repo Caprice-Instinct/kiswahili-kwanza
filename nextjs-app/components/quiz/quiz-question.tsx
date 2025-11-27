@@ -32,6 +32,8 @@ export function QuizQuestion({
   timeRemaining,
   showAnswerFeedback = true,
 }: QuizQuestionProps) {
+  // Debug: log the question object to check for questionImage and other properties
+  console.log("[QuizQuestion] question object:", question);
   const [showHint, setShowHint] = useState(false);
 
   const playAudio = (audioUrl?: string) => {
@@ -46,7 +48,7 @@ export function QuizQuestion({
       case "multiple-choice":
         return (
           <div className="space-y-3">
-            {question.options?.map((option) => {
+            {question.options?.map((option, idx) => {
               let color = "outline";
               if (showAnswerFeedback && selectedAnswer) {
                 if (option.id === selectedAnswer && !option.isCorrect) {
@@ -58,9 +60,10 @@ export function QuizQuestion({
               } else if (selectedAnswer === option.id) {
                 color = "default";
               }
+              // Use a unique key: id + idx
               return (
                 <Button
-                  key={option.id}
+                  key={option.id + "-" + idx}
                   variant={color as any}
                   className={`w-full justify-start text-left h-auto p-4 ${
                     color === "success"
@@ -176,6 +179,30 @@ export function QuizQuestion({
             </div>
           )}
         </div>
+        {/* Show image if present */}
+        {question.questionImage && (
+          <div className="flex flex-col items-center my-4">
+            <img
+              src={question.questionImage || "/images/placeholder.jpg"}
+              alt="Picha ya swali"
+              className="max-h-48 object-contain rounded-lg border"
+              style={{ background: "#f8fafc" }}
+              onError={(e) => {
+                console.error("Image failed to load:", question.questionImage);
+                (e.target as HTMLImageElement).src = "/images/placeholder.jpg";
+                // Show a visible error message below the image
+                const errorDiv = document.getElementById("img-error-msg");
+                if (errorDiv) errorDiv.style.display = "block";
+              }}
+            />
+            <div
+              id="img-error-msg"
+              style={{ display: "none", color: "red", marginTop: 8 }}
+            >
+              Picha haikupatikana: {question.questionImage}
+            </div>
+          </div>
+        )}
         <CardTitle className="text-lg">
           <div className="flex items-center gap-3">
             <span>{question.question}</span>

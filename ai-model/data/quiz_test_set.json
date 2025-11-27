@@ -1,0 +1,72 @@
+[
+  {
+    "id": "test1",
+    "category": "vocabulary",
+    "topic": "fruits",
+    "difficulty": "easy",
+    "questionCount": 2,
+    "questionTypes": ["multiple-choice"],
+    "vocabulary": ["ndizi", "embe", "nanasi"],
+    "referenceQuiz": {
+      "questions": [
+        {
+          "question": "Chagua tunda sahihi: 'Banana' ni _____.",
+          "options": [
+            { "text": "ndizi", "isCorrect": true, "errorType": "correct" },
+            {
+              "text": "ndizu",
+              "isCorrect": false,
+              "errorType": "vowel alternation"
+            },
+            {
+              "text": "ndidi",
+              "isCorrect": false,
+              "errorType": "letter confusion"
+            },
+            {
+              "text": "ndzi",
+              "isCorrect": false,
+              "errorType": "syllable omission"
+            }
+          ],
+          "correctAnswer": "ndizi"
+        }
+      ]
+    }
+  },
+  {
+    "id": "test2",
+    "category": "grammar",
+    "topic": "verbs",
+    "difficulty": "medium",
+    "questionCount": 1,
+    "questionTypes": ["multiple-choice"],
+    "vocabulary": ["kula", "kunywa"],
+    "referenceQuiz": {
+      "questions": [
+        {
+          "question": "Chagua kitenzi sahihi: 'To eat' ni _____.",
+          "options": [
+            { "text": "kula", "isCorrect": true, "errorType": "correct" },
+            {
+              "text": "kura",
+              "isCorrect": false,
+              "errorType": "vowel alternation"
+            },
+            {
+              "text": "kulaa",
+              "isCorrect": false,
+              "errorType": "syllable omission"
+            },
+            {
+              "text": "kula",
+              "isCorrect": false,
+              "errorType": "letter confusion"
+            }
+          ],
+          "correctAnswer": "kula"
+        }
+      ]
+    }
+  }
+]

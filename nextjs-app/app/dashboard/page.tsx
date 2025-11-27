@@ -72,51 +72,6 @@ export default function Dashboard() {
             </CardContent>
           </Card>
         </div>
-
-        {/* Progress Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-primary">
-                {userStats?.stats?.totalLessonsCompleted || 0}
-              </div>
-              <p className="text-sm text-gray-600 dyslexic-text">
-                Masomo yamekamilika
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-yellow-600">
-                {Math.floor((userStats?.stats?.averageScore || 0) / 20)}
-              </div>
-              <p className="text-sm text-gray-600 dyslexic-text">
-                Nyota zilizopata
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">
-                {userStats?.wordsLearned || 25}
-              </div>
-              <p className="text-sm text-gray-600 dyslexic-text">
-                Maneno yamejifunza
-              </p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="p-4 text-center">
-              <div className="text-2xl font-bold text-orange-600">
-                {userStats?.streak || 0}
-              </div>
-              <p className="text-sm text-gray-600 dyslexic-text">
-                Siku za mfululizo
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">

@@ -84,65 +84,6 @@ export default function ProgressPage() {
       </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card className="text-center bg-gradient-to-br from-sky-50 to-sky-100 dark:from-sky-900/20 dark:to-sky-800/20 border-sky-200/50 dark:border-sky-700/30">
-            <CardContent className="pt-6">
-              <div className="w-12 h-12 bg-sky-200 dark:bg-sky-800 rounded-full flex items-center justify-center mx-auto mb-3">
-                <BookOpen className="w-6 h-6 text-sky-700 dark:text-sky-300" />
-              </div>
-              <div className="text-3xl font-bold text-sky-700 dark:text-sky-300 dyslexic-text">
-                {completedLessons}
-              </div>
-              <p className="text-sm text-sky-600 dark:text-sky-400 dyslexic-text">
-                Masomo yamekamilika
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/20 border-violet-200/50 dark:border-violet-700/30">
-            <CardContent className="pt-6">
-              <div className="w-12 h-12 bg-violet-200 dark:bg-violet-800 rounded-full flex items-center justify-center mx-auto mb-3">
-                <GamepadIcon className="w-6 h-6 text-violet-700 dark:text-violet-300" />
-              </div>
-              <div className="text-3xl font-bold text-violet-700 dark:text-violet-300 dyslexic-text">
-                {totalStars}
-              </div>
-              <p className="text-sm text-violet-600 dark:text-violet-400 dyslexic-text">
-                Nyota zilizopata
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 border-pink-200/50 dark:border-pink-700/30">
-            <CardContent className="pt-6">
-              <div className="w-12 h-12 bg-pink-200 dark:bg-pink-800 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Clock className="w-6 h-6 text-pink-700 dark:text-pink-300" />
-              </div>
-              <div className="text-3xl font-bold text-pink-700 dark:text-pink-300 dyslexic-text">
-                {totalWords}
-              </div>
-              <p className="text-sm text-pink-600 dark:text-pink-400 dyslexic-text">
-                Maneno yamejifunza
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="text-center bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/20 border-indigo-200/50 dark:border-indigo-700/30">
-            <CardContent className="pt-6">
-              <div className="w-12 h-12 bg-indigo-200 dark:bg-indigo-800 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Zap className="w-6 h-6 text-indigo-700 dark:text-indigo-300" />
-              </div>
-              <div className="text-3xl font-bold text-indigo-700 dark:text-indigo-300 dyslexic-text">
-                {streakDays}
-              </div>
-              <p className="text-sm text-indigo-600 dark:text-indigo-400 dyslexic-text">
-                Siku za mfululizo
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Quiz Progress Table */}
           <div className="lg:col-span-3 mb-8">
@@ -161,35 +102,69 @@ export default function ProgressPage() {
                     <table className="min-w-full text-sm">
                       <thead>
                         <tr className="bg-gray-100">
-                          <th className="p-2 text-left">Jaribio</th>
-                          <th className="p-2 text-left">Alama</th>
-                          <th className="p-2 text-left">Asilimia</th>
-                          <th className="p-2 text-left">Tarehe</th>
-                          <th className="p-2 text-left">Hali</th>
+                          <th className="p-2 text-left">Category</th>
+                          <th className="p-2 text-left">Difficulty</th>
+                          <th className="p-2 text-left">Score</th>
+                          <th className="p-2 text-left">Percentage</th>
+                          <th className="p-2 text-left">Date</th>
+                          <th className="p-2 text-left">Status</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {progress.quiz.attempts.map((a: any, i: number) => (
-                          <tr key={a._id || i} className="border-b">
-                            <td className="p-2">{a.quizId}</td>
-                            <td className="p-2">
-                              {a.score} / {a.totalPoints}
-                            </td>
-                            <td className="p-2">{a.percentage}%</td>
-                            <td className="p-2">{formatDate(a.completedAt)}</td>
-                            <td className="p-2">
-                              {a.percentage >= 70 ? (
-                                <span className="text-green-700 font-bold">
-                                  Umepita
-                                </span>
-                              ) : (
-                                <span className="text-red-700 font-bold">
-                                  Hujapita
-                                </span>
-                              )}
-                            </td>
-                          </tr>
-                        ))}
+                        {progress.quiz.attempts.map((a: any, i: number) => {
+                          // Fallbacks for old attempts
+                          const category =
+                            a.category ||
+                            a.metadata?.category ||
+                            a.quizCategory ||
+                            "-";
+                          const difficulty =
+                            a.difficulty ||
+                            a.metadata?.difficulty ||
+                            a.quizDifficulty ||
+                            "-";
+                          const score =
+                            typeof a.score === "number"
+                              ? a.score
+                              : a.points || 0;
+                          const total =
+                            a.totalPoints || a.total || a.maxScore || 0;
+                          const percentage =
+                            typeof a.percentage === "number"
+                              ? a.percentage
+                              : total
+                              ? Math.round((score / total) * 100)
+                              : 0;
+                          const date = a.completedAt || a.date || a.createdAt;
+                          const passed =
+                            typeof a.passed === "boolean"
+                              ? a.passed
+                              : percentage >= 60;
+                          return (
+                            <tr key={a._id || i} className="border-b">
+                              <td className="p-2">{category}</td>
+                              <td className="p-2">{difficulty}</td>
+                              <td className="p-2">
+                                {score} / {total}
+                              </td>
+                              <td className="p-2">{percentage}%</td>
+                              <td className="p-2">
+                                {date ? formatDate(date) : "-"}
+                              </td>
+                              <td className="p-2">
+                                {passed ? (
+                                  <span className="text-green-700 font-bold">
+                                    Umepita
+                                  </span>
+                                ) : (
+                                  <span className="text-red-700 font-bold">
+                                    Hujapita
+                                  </span>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
                       </tbody>
                     </table>
                   </div>

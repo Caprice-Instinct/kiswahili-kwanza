@@ -9,6 +9,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "jsonrepair": "^3.13.1",
-    "mongodb": "^6.0.0"
+    "mongodb": "^6.0.0",
+    "recharts": "^3.5.0"
   }
 }

@@ -6,20 +6,25 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
     const db = await getDatabase();
-    const userId = new ObjectId(session.user.id);
-    // Fetch all quiz attempts
+    const userIdStr = session.user.id;
+    let userIdObj = null;
+    try {
+      userIdObj = new ObjectId(userIdStr);
+    } catch (e) {
+      userIdObj = null;
+    }
+    // Accept both string and ObjectId userId
     const attempts = await db
       .collection("quiz_attempts")
-      .find({ userId })
-      .sort({ completedAt: -1 })
+      .find({
+        $or: [
+          { userId: userIdStr },
+          ...(userIdObj ? [{ userId: userIdObj }] : []),
+        ],
+      })
+      .sort({ completedAt: -1, createdAt: -1 })
       .toArray();
-    // Fetch quiz progress summaries
-    const progress = await db
-      .collection("quiz_progress")
-      .find({ userId })
-      .sort({ updatedAt: -1 })
-      .toArray();
-    return NextResponse.json({ attempts, progress });
+    return NextResponse.json({ attempts });
   } catch (error) {
     console.error("Quiz progress fetch error:", error);
     return NextResponse.json(
@@ -61,6 +66,8 @@ export async function POST(req: NextRequest) {
       answers: data.answers,
       completedAt: data.completedAt ? new Date(data.completedAt) : new Date(),
       createdAt: new Date(),
+      category: data.category || null,
+      difficulty: data.difficulty || null,
     };
     await db.collection("quiz_attempts").insertOne(attempt);
     // Update or create user quiz progress summary

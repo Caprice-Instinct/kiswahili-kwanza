@@ -48,15 +48,13 @@ export const CATEGORY_STORIES: Story[] = [
     categoryId: "familia_ndogo",
     title: "Siku ya Familia ya Juma",
     titleEnglish: "Juma's Family Day",
-    content: `Juma ana <span class="highlight" data-english="mother">mama</span> na <span class="highlight" data-english="father">baba</span> wanaompenda. Kila asubuhi, <span class="highlight" data-english="mother">mama</span> humwandalia chai. <span class="highlight" data-english="father">Baba</span> humpeleka shule. <span class="highlight" data-english="child">Mtoto</span> mdogo wa jirani anacheza nao. <span class="highlight" data-english="son/daughter">Mwana</span> wa pili ni dada yake. <span class="highlight" data-english="brother">Kaka</span> na <span class="highlight" data-english="sister">dada</span> wanamsaidia kufanya kazi. Jioni, <span class="highlight" data-english="grandmother">bibi</span> na <span class="highlight" data-english="grandfather">babu</span> wanakuja kutembelea familia yao.`,
+    content: `Juma ana <span class="highlight" data-english="mother">mama</span> na <span class="highlight" data-english="father">baba</span> wanaompenda sana. Kila asubuhi, <span class="highlight" data-english="mother">mama</span> humwamsha Juma kwa upendo na kumwandalia chai tamu. <span class="highlight" data-english="father">Baba</span> humpeleka shule na kumpa ushauri wa maisha. Baada ya shule, <span class="highlight" data-english="brother">kaka</span> yake Juma humsaidia kufanya kazi za nyumbani kama kufagia na kupalilia bustani. <span class="highlight" data-english="sister">Dada</span> yake hupika chakula cha jioni na kumfundisha nyimbo mpya. Jioni, familia hukusanyika pamoja sebuleni kusimulia hadithi na kucheka. Mara nyingi, <span class="highlight" data-english="grandmother">nyanya</span> huleta vitafunwa na kusimulia hadithi za zamani, huku <span class="highlight" data-english="grandfather">babu</span> akifundisha watoto methali na misemo ya Kiswahili. Familia ya Juma inapendana, inashirikiana, na kila mtu ana jukumu muhimu. Usiku, kabla ya kulala, Juma humshukuru Mungu kwa kuwa na familia yenye furaha na upendo.`,
     highlightedWords: [
       { kiswahili: "mama", english: "mother" },
       { kiswahili: "baba", english: "father" },
-      { kiswahili: "mtoto", english: "child" },
-      { kiswahili: "mwana", english: "son/daughter" },
       { kiswahili: "kaka", english: "brother" },
       { kiswahili: "dada", english: "sister" },
-      { kiswahili: "bibi", english: "grandmother" },
+      { kiswahili: "nyanya", english: "grandmother" },
       { kiswahili: "babu", english: "grandfather" },
     ],
   },
@@ -64,21 +62,21 @@ export const CATEGORY_STORIES: Story[] = [
     categoryId: "siku_za_wiki",
     title: "Juma na Siku za Wiki",
     titleEnglish: "Juma and Days of the Week",
-    content: `Juma anapenda kwenda sokoni siku tofauti za wiki.
+    content: `Kila siku ya wiki, Juma ana shughuli maalum na familia yake. 
 
-<span class="highlight" data-english="Sunday">Jumapili</span> ni siku ya pumziko. Familia haendi sokoni <span class="highlight" data-english="Sunday">Jumapili</span>.
+<span class="highlight" data-english="Sunday">Jumapili</span> asubuhi, familia yote huenda kanisani na baadaye hula chakula cha mchana pamoja. Jioni, wanatembelea nyanya na babu na kusikiliza hadithi.
 
-<span class="highlight" data-english="Monday">Jumatatu</span> ni siku ya kwanza ya shule. Mama huenda sokoni <span class="highlight" data-english="Monday">Jumatatu</span> asubuhi.
+<span class="highlight" data-english="Monday">Jumatatu</span> ni siku ya masomo. Juma huamka mapema, mama humwandalia kifungua kinywa, na baba humpeleka shule. Jioni, Juma hufanya kazi za nyumbani na kusoma vitabu.
 
-<span class="highlight" data-english="Tuesday">Jumanne</span> na <span class="highlight" data-english="Wednesday">Jumatano</span> ni siku za kazi. Baba huenda kazini siku hizi.
+<span class="highlight" data-english="Tuesday">Jumanne</span> na <span class="highlight" data-english="Wednesday">Jumatano</span> ni siku za michezo shuleni. Juma hupenda kucheza mpira na marafiki zake baada ya masomo. Mama na dada yake huandaa chakula kitamu cha jioni.
 
-<span class="highlight" data-english="Thursday">Alhamisi</span> ni siku nzuri ya kwenda sokoni. Chakula ni kipya <span class="highlight" data-english="Thursday">Alhamisi</span>.
+<span class="highlight" data-english="Thursday">Alhamisi</span> ni siku ya soko. Baba na Juma hununua matunda na mboga sokoni. Usiku, familia hukusanyika na kucheza mchezo wa "karata" pamoja.
 
-<span class="highlight" data-english="Friday">Ijumaa</span> ni siku ya maandalizi ya wikendi. Mama hununua chakula kingi <span class="highlight" data-english="Friday">Ijumaa</span>.
+<span class="highlight" data-english="Friday">Ijumaa</span> ni siku ya usafi. Juma na kaka yake husafisha nyumba na kupalilia bustani. Mama huoka mkate na familia hula pamoja.
 
-<span class="highlight" data-english="Saturday">Jumamosi</span> ni siku ya kupenda zaidi ya Juma. Familia yote huenda sokoni <span class="highlight" data-english="Saturday">Jumamosi</span> pamoja.
+<span class="highlight" data-english="Saturday">Jumamosi</span> ni siku ya mapumziko na burudani. Familia huenda bustanini au kutazama filamu pamoja. Jioni, wanapanga shughuli za wiki ijayo na kucheka pamoja.
 
-"Kila siku ya wiki ni muhimu," mama anasema kwa Juma.`,
+Juma anajifunza kwamba kila siku ya wiki ina umuhimu wake na inampa furaha na kumbukumbu nzuri na familia yake.`,
     highlightedWords: [
       { kiswahili: "Jumapili", english: "Sunday" },
       { kiswahili: "Jumatatu", english: "Monday" },

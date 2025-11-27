@@ -10,18 +10,59 @@ import { CheckCircle, XCircle, RotateCcw, Trophy, Star } from "lucide-react";
 interface QuizResultsProps {
   quiz: Quiz;
   answers: Record<string, string | string[]>;
+  attempt?: any;
   onRetry?: () => void;
 }
 
-export function QuizResults({ quiz, answers, onRetry }: QuizResultsProps) {
+export function QuizResults({
+  quiz,
+  answers,
+  attempt,
+  onRetry,
+}: QuizResultsProps) {
+  // Prefer attempt data if provided, else calculate from answers
   const calculateResults = () => {
+    if (attempt) {
+      return {
+        questionResults: quiz.questions.map((question) => {
+          const userAnswer = answers[question.id];
+          let isCorrect = false;
+          if (Array.isArray(question.correctAnswer)) {
+            isCorrect =
+              Array.isArray(userAnswer) &&
+              userAnswer.length === question.correctAnswer.length &&
+              userAnswer.every((ans) => question.correctAnswer.includes(ans));
+          } else {
+            isCorrect = userAnswer === question.correctAnswer;
+          }
+          return {
+            question,
+            userAnswer,
+            isCorrect,
+            pointsEarned: isCorrect ? question.points : 0,
+          };
+        }),
+        correctAnswers: attempt.score / (quiz.questions[0]?.points || 10),
+        totalQuestions: quiz.questions.length,
+        totalScore: attempt.score,
+        maxScore: attempt.totalPoints,
+        percentage: attempt.percentage,
+        passed: attempt.percentage >= quiz.passingScore,
+        mistakes: attempt.mistakes || [],
+      };
+    }
+    // fallback: recalculate from answers
     let correctAnswers = 0;
     let totalScore = 0;
-
+    const mistakes: Array<{
+      question: string;
+      userAnswer: string | string[] | undefined;
+      correctAnswer: string | string[];
+      explanation?: string;
+    }> = [];
     const questionResults = quiz.questions.map((question) => {
       const userAnswer = answers[question.id];
       let isCorrect = false;
-
       if (Array.isArray(question.correctAnswer)) {
         isCorrect =
           Array.isArray(userAnswer) &&
@@ -30,12 +71,17 @@ export function QuizResults({ quiz, answers, onRetry }: QuizResultsProps) {
       } else {
         isCorrect = userAnswer === question.correctAnswer;
       }
-
       if (isCorrect) {
         correctAnswers++;
         totalScore += question.points;
+      } else {
+        mistakes.push({
+          question: question.question,
+          userAnswer,
+          correctAnswer: question.correctAnswer,
+          explanation: question.explanation,
+        });
       }
-
       return {
         question,
         userAnswer,
@@ -43,10 +89,8 @@ export function QuizResults({ quiz, answers, onRetry }: QuizResultsProps) {
         pointsEarned: isCorrect ? question.points : 0,
       };
     });
-
     const percentage = Math.round((totalScore / quiz.totalPoints) * 100);
     const passed = percentage >= quiz.passingScore;
-
     return {
       questionResults,
       correctAnswers,
@@ -55,9 +99,9 @@ export function QuizResults({ quiz, answers, onRetry }: QuizResultsProps) {
       maxScore: quiz.totalPoints,
       percentage,
       passed,
+      mistakes,
     };
   };
-
   const results = calculateResults();
 
   const getPerformanceMessage = () => {
@@ -81,6 +125,86 @@ export function QuizResults({ quiz, answers, onRetry }: QuizResultsProps) {
 
   return (
     <div className="space-y-6 w-full max-w-4xl mx-auto">
+      {/* Visually striking score and percentage at the top */}
+      <Card className="border-4 border-blue-600 shadow-lg bg-gradient-to-br from-blue-50 to-green-50">
+        <CardHeader className="text-center pb-0">
+          <CardTitle className="text-3xl font-extrabold text-blue-800 mb-2 tracking-wide">
+            🏆 Matokeo ya Jaribio 🏆
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col md:flex-row justify-center items-center gap-10 mb-2 mt-2">
+            <div className="text-center flex flex-col items-center">
+              <div className="rounded-full bg-blue-200 border-4 border-blue-400 w-28 h-28 flex items-center justify-center mb-2">
+                <span className="text-5xl font-extrabold text-blue-900 drop-shadow-lg">
+                  {results.totalScore}
+                </span>
+              </div>
+              <div className="text-blue-700 text-lg font-semibold">Alama</div>
+              <div className="text-blue-500 text-sm">
+                (juu ya {results.maxScore})
+              </div>
+            </div>
+            <div className="text-center flex flex-col items-center">
+              <div className="rounded-full bg-green-200 border-4 border-green-400 w-28 h-28 flex items-center justify-center mb-2">
+                <span className="text-5xl font-extrabold text-green-900 drop-shadow-lg">
+                  {results.percentage}%
+                </span>
+              </div>
+              <div className="text-green-700 text-lg font-semibold">
+                Asilimia
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+      {/* Mistakes summary */}
+      {results.mistakes && results.mistakes.length > 0 && (
+        <Card className="border-red-400">
+          <CardHeader>
+            <CardTitle className="text-red-600 text-lg">Makosa Yako</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="space-y-4">
+              {results.mistakes.map((mistake, idx) => (
+                <li key={idx} className="border rounded-lg p-3 bg-red-50">
+                  <div className="font-medium mb-1">{mistake.question}</div>
+                  <div>
+                    <span className="font-semibold text-gray-700">
+                      Jibu lako:{" "}
+                    </span>
+                    <span className="text-red-600">
+                      {Array.isArray(mistake.userAnswer)
+                        ? mistake.userAnswer.join(", ")
+                        : mistake.userAnswer || "Hakuna jibu"}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-700">
+                      Jibu sahihi:{" "}
+                    </span>
+                    <span className="text-green-600">
+                      {Array.isArray(mistake.correctAnswer)
+                        ? mistake.correctAnswer.join(", ")
+                        : mistake.correctAnswer}
+                    </span>
+                  </div>
+                  {mistake.explanation && (
+                    <div className="p-2 mt-2 bg-blue-50 rounded">
+                      <span className="font-medium text-blue-800">
+                        Maelezo:{" "}
+                      </span>
+                      <span className="text-blue-700">
+                        {mistake.explanation}
+                      </span>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </CardContent>
+        </Card>
+      )}
       {/* Overall Results */}
       <Card>
         <CardHeader className="text-center">

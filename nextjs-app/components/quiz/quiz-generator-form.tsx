@@ -105,20 +105,12 @@ export function QuizGeneratorForm({ onGenerate }: QuizGeneratorFormProps) {
           {/* Difficulty */}
           <div>
             <label className="block text-sm font-medium mb-2">Kiwango</label>
-            <select
-              value={formData.difficulty}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  difficulty: e.target.value as any,
-                }))
-              }
-              className="w-full p-3 border-2 border-primary-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-300 rounded-lg outline-none transition"
-            >
-              <option value="beginner">Mwanzo</option>
-              <option value="intermediate">Kati</option>
-              <option value="advanced">Juu</option>
-            </select>
+            <input
+              type="text"
+              value="Mwanzo"
+              disabled
+              className="w-full p-3 border-2 border-primary-400 bg-gray-100 text-gray-700 rounded-lg outline-none transition cursor-not-allowed"
+            />
             <div className="mb-2 flex items-center justify-between mt-6">
               <label className="block text-sm font-medium">
                 Idadi ya Maswali
